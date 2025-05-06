@@ -2475,7 +2475,7 @@ return [
                 'name'       => 'offer_info',
                 'title'      => 'admin::app.configuration.index.sales.checkout.mini-cart.mini-cart-offer-info',
                 'type'       => 'text',
-                'default'    => 'Get Up To 30% OFF on your 1st order',
+                'default'    => "İlk siparişinizde %30'a varan İNDİRİM kazanın",
                 'validation' => 'max:200',
             ],
         ],

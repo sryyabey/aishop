@@ -185,11 +185,10 @@
     });
 </script>
 
-<div class="sticky-cart-animate block md:hidden" v-scope>
+<!--<div class="sticky-cart-animate block md:hidden" v-scope>
     
     <div class="sticky-cart-button-container ml-auto" style="width: 100%;">
-        <!-- Form yapısını v-product component'i ile uyumlu hale getiriyoruz -->
-        <!--<div class="product-info flex-1">
+        <div class="product-info flex-1">
             <img 
                 src="{{ $productBaseImage['medium_image_url'] }}" 
                 alt="{{ $product->name }}"
@@ -199,7 +198,7 @@
                 <div class="product-name line-clamp-1">{{ $product->name }}</div>
                 <div class="product-price">{!! $product->getTypeInstance()->getPriceHtml() !!}</div>
             </div>
-        </div>-->
+        </div>
         <form
             method="POST" 
             action="{{ route('shop.api.checkout.cart.store') }}"
@@ -232,7 +231,7 @@
                 </button>
             </form>
     </div>
-</div>
+</div>-->
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -309,6 +308,8 @@
         }
     });
 </script>
+
+
 <!-- Page Layout -->
 <x-shop::layouts>
     <!-- Page Title -->
@@ -520,7 +521,17 @@
             </x-slot>
         </x-shop::accordion>
     </div>
-
+        <!-- filepath: /Users/tolgaege/Desktop/html/Webapps/trendyx_eticaret/packages/Webkul/Shop/src/Resources/views/products/view.blade.php -->
+    
+     
+    <!-- Related Products bölümünden önce ekleyin -->
+    <div class="container mt-10">
+        <!-- Özel HTML içeriği -->
+        @include('shop::products.view.ozel-html', ['product' => $product])
+    </div>
+    
+        
+    
     <!-- Featured Products -->
     <x-shop::products.carousel
         :title="trans('shop::app.products.view.related-product-title')"

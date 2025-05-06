@@ -1,13 +1,23 @@
 <?php
 
 return [
+
+    'paytr'  => [
+        'code'        => 'paytr',
+        'title'       => 'PayTR',
+        'description' => 'PayTR',
+        'image'       => '/images/paytr.svg',
+        'class'       => 'Webkul\PayTR\Payment\PayTR',
+        'active'      => true,
+        'sort'        => 1,
+    ],
     'cashondelivery'  => [
         'code'        => 'cashondelivery',
         'title'       => 'Cash On Delivery',
         'description' => 'Cash On Delivery',
         'class'       => 'Webkul\Payment\Payment\CashOnDelivery',
         'active'      => true,
-        'sort'        => 1,
+        'sort'        => 2,
     ],
 
     'moneytransfer'   => [
@@ -16,6 +26,6 @@ return [
         'description' => 'Money Transfer',
         'class'       => 'Webkul\Payment\Payment\MoneyTransfer',
         'active'      => true,
-        'sort'        => 2,
+        'sort'        => 3,
     ],
 ];

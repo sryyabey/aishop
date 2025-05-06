@@ -94,7 +94,8 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src"
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\PayTR\\": "packages/Webkul/PayTR/src"
         }
     },
     "autoload-dev": {
@@ -103,7 +104,8 @@
             "Webkul\\Admin\\Tests\\": "packages/Webkul/Admin/tests",
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
-            "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests"
+            "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
+            "Webkul\\PayTR\\": "src/"
         }
     },
     "scripts": {
@@ -121,6 +123,9 @@
             "dont-discover": [
                 "intervention/image",
                 "shetabit/visitor"
+            ],
+            "providers": [
+                "Webkul\\PayTR\\Providers\\PayTRServiceProvider"
             ]
         }
     },
