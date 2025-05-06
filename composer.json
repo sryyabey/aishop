@@ -57,7 +57,7 @@
         "pestphp/pest-plugin-laravel": "^3.0",
         "phpunit/phpunit": "^11.0"
     },
-    "autoload": {
+    "autoload": { 
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
@@ -95,7 +95,8 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\PayTR\\": "packages/Webkul/PayTR/src"
+            "Webkul\\PayTR\\": "packages/Webkul/PayTR/src",
+            "Webkul\\Card\\": "packages/Webkul/Card/src"
         }
     },
     "autoload-dev": {
@@ -105,7 +106,8 @@
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
-            "Webkul\\PayTR\\": "src/"
+            "Webkul\\PayTR\\": "src/",
+            "Webkul\\Card\\": "src/"
         }
     },
     "scripts": {
@@ -125,7 +127,8 @@
                 "shetabit/visitor"
             ],
             "providers": [
-                "Webkul\\PayTR\\Providers\\PayTRServiceProvider"
+                "Webkul\\PayTR\\Providers\\PayTRServiceProvider",
+                "Webkul\\Card\\Providers\\CardServiceProvider"
             ]
         }
     },

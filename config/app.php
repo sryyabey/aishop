@@ -188,9 +188,10 @@ return [
             /*
             * Package Service Providers...
             */
-            Webkul\PayTR\Providers\PayTRServiceProvider::class, 
+            // Webkul\PayTR\Providers\PayTRServiceProvider::class, 
+            Webkul\Card\Providers\CardServiceProvider::class,
             
             // Diğer servis sağlayıcılar...
-        ])->toArray(),
+        ])->toArray(), 
 
 ];

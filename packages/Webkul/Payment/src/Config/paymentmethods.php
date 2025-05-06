@@ -2,12 +2,21 @@
 
 return [
 
-    'paytr'  => [
-        'code'        => 'paytr',
-        'title'       => 'PayTR',
-        'description' => 'PayTR',
-        'image'       => '/images/paytr.svg',
-        'class'       => 'Webkul\PayTR\Payment\PayTR',
+    // 'paytr'  => [
+    //     'code'        => 'paytr',
+    //     'title'       => 'PayTR',
+    //     'description' => 'PayTR',
+    //     'image'       => '/images/paytr.svg',
+    //     'class'       => 'Webkul\PayTR\Payment\PayTR',
+    //     'active'      => true,
+    //     'sort'        => 1,
+    // ],
+    'card'  => [
+        'code'        => 'card',
+        'title'       => 'Cart',
+        'description' => 'Kredi Kartı İle Ödeme',
+        'class'       => 'Webkul\Card\Payment\Card',
+        'sandbox'     => true,
         'active'      => true,
         'sort'        => 1,
     ],
