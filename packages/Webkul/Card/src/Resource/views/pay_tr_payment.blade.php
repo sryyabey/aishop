@@ -2,14 +2,14 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Sollvine PayTr Ödeme</title>
+    <title>Trendyx PayTr Ödeme</title>
 </head>
 <body>
 
 <div>
 
 </div>
-<br><br>
+<br><br> 
 
 <div style="width: 100%; margin: 0 auto; display: table;">
 

@@ -1,7 +1,7 @@
 <?php
 
 Use Webkul\Card\Http\Controllers\PaymentController;
-
+use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('get_payment_token',[PaymentController::class,'getPaymentToken'])->name('get_payment_token');

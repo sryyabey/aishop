@@ -10,7 +10,6 @@ use Webkul\Card\Helpers\WalletApi;
 use Webkul\Sales\Transformers\OrderResource;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-
 class PaymentController
 {
     /**
@@ -18,7 +17,7 @@ class PaymentController
      *
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
-    protected $orderRepository;
+    protected $orderRepository; 
 
     /**
      * WalletApi object
@@ -41,41 +40,48 @@ class PaymentController
         $this->orderRepository = $orderRepository;
         $this->walletApi = $walletApi;
     }
-
+   
     public function getPaymentToken()
     {
         // Zorunlu alanlar - API Entegrasyon Bilgileri
-        $merchant_id    = env('PAYTR_MERCHAND_ID');
-        $merchant_key   = env('PAYTR_MERCHAND_KEY');
-        $merchant_salt  = env('PAYTR_MERCHAND_SALT');
+        // $merchant_id    = env('PAYTR_MERCHANT_ID');
+        // $merchant_key   = env('PAYTR_MERCHANT_KEY');
+        // $merchant_salt  = env('PAYTR_MERCHANT_SALT');
+
+        $PAYTR_MERCHANT_ID="570396";
+        $PAYTR_MERCHANT_KEY="46JihJUD4NjYwxNu";
+        $PAYTR_MERCHANT_SALT="D7Na8UwqwrxuMnw6";
+        // Zorunlu alanlar - API Entegrasyon Bilgileri
+        $merchant_id    = $PAYTR_MERCHANT_ID;
+        $merchant_key   = $PAYTR_MERCHANT_KEY;
+        $merchant_salt  = $PAYTR_MERCHANT_SALT;
+
         $cart = Cart::getCart();
         $cartItems = $cart->items;
         $totalPrice = $cart->grand_total;
         $customer = $cart->customer;
         $address = $cart->billing_address;
-
+        // echo "<pre>";
+        // print_r(value: $address);
+        // echo "</pre>";
         $product_data = $cartItems->map(function ($item) {
             return [
                 $item->name,
                 $item->price,
                 $item->quantity
             ];
-        })->toArray();
+        })->toArray(); 
 
-        // Müşteri bilgileri
-        $email = $customer->email ?? 'misafir@site.com'; // Varsayılan email
+        // Müşteri bilgileri 
+        $email = $address->email ?? 'misafir@trendyx.tr'; // Varsayılan email
                 // Müşteri bilgileri kontrolü ve düzenlemesi
-        $firstName = trim($customer->name ?? '');
-        $lastName = trim($customer->last_name ?? '');
+        $firstName = trim(string: $address->first_name ?? '');
+        $lastName = trim(string: $address->last_name ?? '');
         
         // İsim ve soyisim kontrolü
         if (empty($firstName) && empty($lastName)) {
             $user_name = 'Misafir Kullanıcı';
-        } elseif (empty($lastName)) {
-            $user_name = $firstName;
-        } elseif (empty($firstName)) {
-            $user_name = $lastName;
-        } else {
+        }else {
             $user_name = $firstName . ' ' . $lastName;
         }
         
@@ -112,19 +118,22 @@ class PaymentController
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        $payment_amount = number_format($totalPrice * 100, 0, '', ''); // Kuruş cinsinden, nokta olmadan
+        $user_name = mb_convert_encoding($user_name, 'UTF-8', 'auto');
+        $user_address = mb_convert_encoding($user_address, 'UTF-8', 'auto');
+        $user_phone = preg_replace('/[^0-9]/', '', $user_phone); // Sadece rakamlar
+
         // Benzersiz sipariş numarası oluşturma
-        $merchant_oid = uniqid($cart->id . '_');
+        $merchant_oid = uniqid($cart->id . '');
         
         // Ürün verilerinin kontrolü
         $product_data = $cartItems->map(function ($item) {
             return [
-                'name' => substr($item->name ?? 'Ürün', 0, 100), // Max 100 karakter
-                'price' => (float)($item->price ?? 0),
-                'quantity' => (int)($item->quantity ?? 1)
+                $item->name,  // Ürün adı
+                number_format($item->price, 2, '.', ''),  // Fiyat (örn: 499.00)  
+                $item->quantity  // Adet
             ];
-        })->filter(function ($item) {
-            return $item['price'] > 0 && $item['quantity'] > 0;
-        })->values()->toArray();
+        })->toArray();
 
         if (empty($product_data)) {
             session()->flash('error', 'Geçersiz ürün bilgisi.');
@@ -134,19 +143,19 @@ class PaymentController
         $user_basket = base64_encode(json_encode($product_data));
 
         // Cart güncelleme
-        $cart->merchand_oid = $merchant_oid;
-        $cart->save();
-        // try {
-        //     $cart->merchand_oid = $merchant_oid;
-        //     $cart->save();
-        // } catch (\Exception $e) {
-        //     Log::error('Cart güncelleme hatası: ' . $e->getMessage());
-        //     session()->flash('error', 'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
-        //     return redirect()->route('shop.checkout.cart.index');
-        // }
+        // $cart->merchand_oid = $merchant_oid;
+        // $cart->save(); 
+        try {
+            $cart->merchand_oid = $merchant_oid;
+            $cart->save();
+        } catch (\Exception $e) {
+            Log::error('Cart güncelleme hatası: ' . $e->getMessage());
+            session()->flash('error', 'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+            return redirect()->route('shop.checkout.cart.index');
+        }
 
-        $merchant_ok_url    = 'https://sollvine.com/paytr_payment_success';
-        $merchant_fail_url  = 'https://sollvine.com/paytr_payment_fail';
+        $merchant_ok_url    = 'https://trendyx.tr/paytr_payment_success';
+        $merchant_fail_url  = 'https://trendyx.tr/paytr_payment_fail';
         //$merchant_fail_url  = 'https://585f4c1240a6c29b44556f448a5431fd.serveo.net/paytr_payment_call';
 
         //24.133.152.226
@@ -163,32 +172,43 @@ class PaymentController
         $currency        = "TL";
 
         // Hash oluşturulması
-        $hash_str = $merchant_id . $user_ip . $merchant_oid . $email . $payment_amount . $user_basket . $no_installment . $max_installment . $currency . $test_mode;
-
+        $hash_str = implode('', [
+            $merchant_id,
+            $user_ip,
+            $merchant_oid,
+            $email,
+            $payment_amount,
+            $user_basket,
+            $no_installment,
+            $max_installment,
+            $currency,
+            $test_mode
+        ]);
         $paytr_token = base64_encode(hash_hmac('sha256', $hash_str . $merchant_salt, $merchant_key, true));
 
         // POST verileri
         $post_vals = [
-            'merchant_id'       => $merchant_id,
-            'user_ip'           => $user_ip,
-            'merchant_oid'      => $merchant_oid,
-            'email'             => $email,
-            'payment_amount'    => $payment_amount,
-            'paytr_token'       => $paytr_token,
-            'user_basket'       => $user_basket,
-            'debug_on'          => $debug_on,
-            'no_installment'    => $no_installment,
-            'max_installment'   => $max_installment,
-            'user_name'         => $user_name,
-            'user_address'      => $user_address,
-            'user_phone'        => $user_phone,
-            'merchant_ok_url'   => $merchant_ok_url,
+            'merchant_id' => $merchant_id,
+            'user_ip' => $user_ip,
+            'merchant_oid' => $merchant_oid,
+            'email' => $email,
+            'payment_amount' => $payment_amount,
+            'paytr_token' => $paytr_token,
+            'user_basket' => $user_basket,
+            'debug_on' => $debug_on,
+            'no_installment' => $no_installment,
+            'max_installment' => $max_installment,
+            'user_name' => $user_name,
+            'user_address' => $user_address,
+            'user_phone' => $user_phone,
+            'merchant_ok_url' => $merchant_ok_url,
             'merchant_fail_url' => $merchant_fail_url,
-            'timeout_limit'     => $timeout_limit,
-            'currency'          => $currency,
-            'test_mode'         => $test_mode,
+            'timeout_limit' => $timeout_limit,
+            'currency' => $currency,
+            'test_mode' => $test_mode,
+            'lang' => 'tr'
         ];
-
+        // print_r($post_vals);
 
 
         // Guzzle HTTP Client ile isteği gönder
@@ -225,10 +245,18 @@ class PaymentController
 
         // Gelen tüm POST verisini yakalama
         $post = $request->all();
-        //Log::info('PAYTR POST Data:', $post);
+        Log::info('PAYTR POST Data:', $post); 
 
-        $merchant_key   = env('PAYTR_MERCHAND_KEY');
-        $merchant_salt  = env('PAYTR_MERCHAND_SALT');
+        $PAYTR_MERCHANT_ID="570396";
+        $PAYTR_MERCHANT_KEY="46JihJUD4NjYwxNu";
+        $PAYTR_MERCHANT_SALT="D7Na8UwqwrxuMnw6";
+        // Zorunlu alanlar - API Entegrasyon Bilgileri
+        $merchant_id    = $PAYTR_MERCHANT_ID;
+        $merchant_key   = $PAYTR_MERCHANT_KEY;
+        $merchant_salt  = $PAYTR_MERCHANT_SALT; 
+
+        // $merchant_key   = env('PAYTR_MERCHAND_KEY');
+        // $merchant_salt  = env('PAYTR_MERCHAND_SALT');
 
         $hash = base64_encode(hash_hmac('sha256', $post['merchant_oid'] . $merchant_salt . $post['status'] . $post['total_amount'], $merchant_key, true));
 
@@ -236,8 +264,8 @@ class PaymentController
             return response('PAYTR notification failed: bad hash', 400);
         }
 
-        $cart = \Webkul\Checkout\Models\Cart::where('merchand_oid', $post['merchant_oid'])->first(); // Typo düzeltildi
-
+        $cart = \Webkul\Checkout\Models\Cart::where('merchant_oid', $post['merchant_oid'])->first();
+        
         if (!$cart) {
             session()->flash('error', trans('shop::app.checkout.cart.empty'));
             return redirect()->route('shop.checkout.onepage.index');
@@ -250,37 +278,36 @@ class PaymentController
         if ($post['status'] == 'success') {
             $order_check = Order::where('cart_id',$cart->id)->first();
 
+            $orderData = (new OrderResource($cart))->jsonSerialize();
+            $order = $this->orderRepository->create($orderData);
             if ($order_check){
                 if ($order_check->status == 'pending'){
-                    $order->status = 'processing';
+                    $order->status = 'processing'; // HATA: $order tanımlı değil!
                     $order->save();
                     echo 'OK';
                     exit();
-                }else{
+                }else {
                     echo 'OK';
                     exit();
                 }
             }
 
-            $orderData = (new OrderResource($cart))->jsonSerialize();
-            $order = $this->orderRepository->create($orderData);
             $order->status = 'processing';
             $order->save();
+    
             Log::info('Order :', $order);
-
-            // OK yanıtı verin
             echo "OK";
             exit;
 
         } else {
             $order = $this->orderRepository->create($orderData);
             $order->status = 'canceled';
-            $order->failed_reason_code = $post['failed_reason_code'];
-            $order->failed_reason_msg = $post['failed_reason_msg'];
+            $order->failed_reason_code = $post['failed_reason_code'] ?? null;
+            $order->failed_reason_msg = $post['failed_reason_msg'] ?? null;
             $order->save();
-
+    
             session()->flash('error', trans('shop::app.checkout.payment-failed'));
-            return redirect()->route('shop.checkout.onepage.index');
+            return redirect()->route('shop.checkout.onepage.index'); 
         }
 
 
@@ -294,7 +321,8 @@ class PaymentController
 
         session()->flash('success', 'Siparişiniz Başarılı Bir Şekide Alındı !');
 
-        return redirect()->route('shop.customers.account.orders.index');
+        return redirect()->route('shop.checkout.onepage.index');
+        // return redirect()->route('shop.customers.account.orders.index');
     }
 
     // fail tarafı ayrı kodlanacak
