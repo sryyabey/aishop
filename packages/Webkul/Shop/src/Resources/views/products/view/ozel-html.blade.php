@@ -364,24 +364,23 @@
           }
           
           .ks-faq-item {
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            overflow: hidden;
+              background: #fff;
+              border-radius: 8px;
+              margin-bottom: 16px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
           }
-          
+                    
           .ks-faq-question {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            background: #fff;
-            transition: background-color 0.3s;
+              padding: 20px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              cursor: pointer;
+              user-select: none;
           }
           
           .ks-faq-question:hover {
-            background-color: #f9f9f9;
+              background-color: rgba(139, 69, 19, 0.05);
           }
           
           .ks-faq-question h3 {
@@ -389,16 +388,26 @@
             margin: 0;
           }
           
-          .ks-faq-arrow {
-            transition: transform 0.3s;
-          }
-          
           .ks-faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+              padding: 0;
+              max-height: 0;
+              overflow: hidden;
+              transition: all 0.3s ease-out;
+              opacity: 0;
           }
+          .ks-faq-item.active .ks-faq-answer {
+              padding: 20px;
+              max-height: 500px; /* Yeterince büyük bir değer */
+              opacity: 1;
+          }
+
+          .ks-faq-arrow {
+                transition: transform 0.3s ease;
+            }
+
+            .ks-faq-item.active .ks-faq-arrow {
+                transform: rotate(180deg);
+            }
           
           .ks-faq-answer p {
             margin: 0;
@@ -496,6 +505,147 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+/* Touch cihazlar için düzenlemeler */
+@media (hover: none) {
+    .ks-faq-question {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .ks-faq-question:active {
+        background-color: rgba(139, 69, 19, 0.05);
+    }
+}
+
+/* iPhone SE gibi küçük ekranlar için */
+@media screen and (max-width: 375px) {
+    .ks-hero-title {
+        font-size: 24px;
+    }
+
+    .ks-section-title {
+        font-size: 22px;
+    }
+
+    .ks-benefit-item {
+        width: 100%;
+    }
+
+    .ks-comparison-table {
+        font-size: 13px;
+    }
+}
+/* Mobil düzenlemeler */
+@media screen and (max-width: 768px) {
+    .ks-hero {
+        padding: 40px 15px;
+    }
+
+    .ks-hero-title {
+        font-size: 28px;
+    }
+
+    .ks-hero-subtitle {
+        font-size: 16px;
+    }
+
+    .ks-benefits-container {
+        padding: 30px 15px;
+    }
+
+    .ks-section-title {
+        font-size: 24px;
+    }
+
+    .ks-section-text {
+        font-size: 16px;
+    }
+
+    .ks-benefits-content {
+        gap: 15px;
+    }
+
+    .ks-benefits-column {
+        width: 100%;
+    }
+
+    .ks-benefit-item {
+        padding: 15px;
+    }
+
+    .ks-comparison-container {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .ks-comparison-left,
+    .ks-comparison-right {
+        min-width: 100%;
+    }
+
+    .ks-table-header-cell,
+    .ks-table-feature,
+    .ks-table-value {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .ks-stats-container {
+        flex-direction: column;
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .ks-stats-image,
+    .ks-stats-content {
+        width: 100%;
+    }
+
+    .ks-stat-item {
+        gap: 10px;
+    }
+
+    .ks-circular-progress {
+        width: 60px;
+        height: 60px;
+    }
+
+    .ks-percentage {
+        font-size: 14px;
+    }
+
+    .ks-stat-description {
+        font-size: 14px;
+    }
+
+    .ks-faq-section {
+        padding: 30px 15px;
+    }
+
+    .ks-faq-title {
+        font-size: 24px;
+    }
+
+    .ks-faq-subtitle {
+        font-size: 16px;
+    }
+
+    .ks-faq-question h3 {
+        font-size: 16px;
+    }
+
+    .ks-faq-answer p {
+        font-size: 14px;
+    }
+
+    .ks-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+}
 </style>
 @endpush
 <div class="ks-reset ks-body"> 
@@ -703,45 +853,22 @@
           </div>
           
           <div class="ks-faq-container">
-            
-          <div class="ks-faq-item">
-        <div class="ks-faq-question">
-            <h3>Pil ömrü ne kadar?</h3>
-            <svg class="ks-faq-arrow" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-            </svg>
-        </div>
-        <div class="ks-faq-answer">
-            <p>Tam şarjla 8 saate kadar kesintisiz kullanım sağlar.</p>
-        </div>
-    </div>
-            
-    <div class="ks-faq-item">
-        <div class="ks-faq-question">
-            <h3>Işık ayarları nasıl yapılır?</h3>
-            <svg class="ks-faq-arrow" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-            </svg>
-        </div>
-        <div class="ks-faq-answer">
-            <p>Dokunmatik kontrol paneli üzerinden 7 farklı renk ve 3 farklı parlaklık seviyesi ayarlanabilir.</p>
-        </div>
-    </div>
-            
-    <div class="ks-faq-item">
-        <div class="ks-faq-question">
-            <h3>Garanti süresi nedir?</h3>
-            <svg class="ks-faq-arrow" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-            </svg>
-        </div>
-        <div class="ks-faq-answer">
-            <p>2 yıl resmi distribütör garantisi mevcuttur.</p>
-        </div>
-    </div>
-            
-
-
+              @foreach ($faqs as $faq)
+              <div class="ks-faq-item">
+                  <div class="ks-faq-question">
+                      <h3 class="text-lg font-medium">{{ $faq['question'] }}</h3>
+                      <span class="ks-faq-arrow">
+                          
+                          <svg class="ks-faq-arrow" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+                        </svg>
+                      </span>
+                  </div>
+                  <div class="ks-faq-answer">
+                      <p>{{ $faq['answer'] }}</p>
+                  </div>
+              </div>
+              @endforeach
           </div>
           
           <div class="ks-faq-cta">
@@ -753,75 +880,59 @@
         </div>   
 
 
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            // Handle all buy buttons
-            const ksBuyButtons = document.querySelectorAll('.ks-btn');
-            ksBuyButtons.forEach(function(button) {
-              button.addEventListener('click', function() {
-                // In a real Bagisto implementation, you would add to cart here
-                // This is just a placeholder
-                alert('Ürün sepete ekleniyor...');
-                // For Bagisto integration:
-                // window.location.href = '/cart/add?id=' + productId + '&quantity=1';
-              });
-            });
+        @push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let faqItems = document.querySelectorAll('.ks-faq-item');
+    let touchStartY = 0;
+    
+    faqItems.forEach(function(item) {
+        let question = item.querySelector('.ks-faq-question');
+        let answer = item.querySelector('.ks-faq-answer');
+        
+        // Dokunmatik olayları
+        question.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        question.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        });
+
+        question.addEventListener('click', function(e) {
+            e.preventDefault();
             
-            // Animate stats circles
-            const ksCircles = document.querySelectorAll('.ks-circular-progress');
+            let isActive = item.classList.contains('active');
             
-            ksCircles.forEach(function(circle) {
-              const percentage = parseInt(circle.getAttribute('data-percentage'));
-              const circleFill = circle.querySelector('.ks-circle-fill');
-              const circumference = 2 * Math.PI * 36; // r = 36
-              
-              // Calculate the dash offset
-              const dashOffset = circumference - (percentage / 100) * circumference;
-              
-              // Initial state (for animation)
-              circleFill.style.strokeDasharray = circumference;
-              circleFill.style.strokeDashoffset = circumference;
-              
-              // Animate after a small delay
-              setTimeout(() => {
-                circleFill.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
-                circleFill.style.strokeDashoffset = dashOffset;
-              }, 300);
-            });
-            
-            // FAQ Accordion
-            const ksFaqQuestions = document.querySelectorAll('.ks-faq-question');
-            
-            ksFaqQuestions.forEach(function(question) {
-              question.addEventListener('click', function() {
-                const item = question.parentNode;
-                const answer = question.nextElementSibling;
-                const arrow = question.querySelector('.ks-faq-arrow');
-                
-                // Toggle active class
-                item.classList.toggle('active');
-                
-                // Close all other FAQs
-                document.querySelectorAll('.ks-faq-item').forEach(function(otherItem) {
-                  if (otherItem !== item) {
+            // Diğer tüm FAQ öğelerini kapat
+            faqItems.forEach(function(otherItem) {
+                if (otherItem !== item) {
                     otherItem.classList.remove('active');
-                    otherItem.querySelector('.ks-faq-answer').style.maxHeight = null;
-                    otherItem.querySelector('.ks-faq-answer').style.padding = '0 20px';
-                    otherItem.querySelector('.ks-faq-arrow').style.transform = 'rotate(0deg)';
-                  }
-                });
-                
-                // Toggle the clicked one
-                if (item.classList.contains('active')) {
-                  answer.style.maxHeight = answer.scrollHeight + 40 + 'px';
-                  answer.style.padding = '20px';
-                  arrow.style.transform = 'rotate(180deg)';
-                } else {
-                  answer.style.maxHeight = null;
-                  answer.style.padding = '0 20px';
-                  arrow.style.transform = 'rotate(0deg)';
+                    let otherAnswer = otherItem.querySelector('.ks-faq-answer');
+                    otherAnswer.style.maxHeight = '0';
                 }
-              });
             });
-          });
-        </script> 
+            
+            // Tıklanan öğeyi aç/kapat
+            item.classList.toggle('active');
+            
+            if (!isActive) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = '0';
+            }
+        });
+    });
+
+    // Sayfa yüklendiğinde smooth scroll için
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+</script>
+@endpush

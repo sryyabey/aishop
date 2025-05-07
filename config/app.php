@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Bagisto'),
+    'name' => env('APP_NAME', 'Trendyx'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -190,7 +190,7 @@ return [
             */
             // Webkul\PayTR\Providers\PayTRServiceProvider::class, 
             Webkul\Card\Providers\CardServiceProvider::class,
-            
+             
             // Diğer servis sağlayıcılar...
         ])->toArray(), 
 

@@ -319,10 +319,10 @@ return [
 
                 'offer-information' => [
                     'content' => [
-                        'title' => 'İlk siparişinizde %40\'a kadar İNDİRİM alın HEMEN ALIŞVERİŞ YAPIN',
+                        'title' => 'İlk siparişinizde %5\'e kadar İNDİRİM alın HEMEN ALIŞVERİŞ YAPIN',
                     ],
 
-                    'name' => 'Teklif Bilgisi',
+                    'name' => 'Teklif Bilgisi', 
                 ],
 
                 'services-content' => [

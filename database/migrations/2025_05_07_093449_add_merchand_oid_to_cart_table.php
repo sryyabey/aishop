@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('cart', function (Blueprint $table) {
             $table->string('merchant_oid')->nullable()->after('id');
         });
-    }
+    } 
 
     public function down(): void
     {
@@ -22,5 +22,4 @@ return new class extends Migration
             $table->dropColumn('merchant_oid');
         });
     }
-
 };

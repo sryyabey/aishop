@@ -1077,7 +1077,7 @@ return [
         'index' => [
             'categories-carousel' => 'Kategoriler Karuseli',
             'image-carousel'      => 'Görüntü Karuseli',
-            'offer'               => 'İlk siparişinizde %40’a kadar indirim kazanın, ŞİMDİ ALIŞVERİŞ YAPIN',
+            'offer'               => 'İlk siparişinizde %5’e kadar indirim kazanın, ŞİMDİ ALIŞVERİŞ YAPIN',
             'product-carousel'    => 'Ürün Karuseli',
             'resend-verify-email' => 'Doğrulama e-postasını yeniden gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',

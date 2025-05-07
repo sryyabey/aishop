@@ -527,7 +527,21 @@
     <!-- Related Products bölümünden önce ekleyin -->
     <div class="container mt-10">
         <!-- Özel HTML içeriği -->
-        @include('shop::products.view.ozel-html', ['product' => $product])
+        
+        @include('shop::products.view.ozel-html', ['product' => $product,"faqs"=>[
+            [
+                'question' => 'Pil ömrü ne kadar?',
+                'answer' => 'Tam şarjla 8 saate kadar kesintisiz kullanım sağlar.'
+            ],
+            [
+                'question' => 'Işık ayarları nasıl yapılır?',
+                'answer' => 'Dokunmatik kontrol paneli üzerinden 7 farklı renk ve 3 farklı parlaklık seviyesi ayarlanabilir.'
+            ],
+            [
+                'question' => 'Garanti süresi nedir?',
+                'answer' => '2 yıl resmi distribütör garantisi mevcuttur.'
+            ],
+        ]])
     </div>
     
         

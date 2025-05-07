@@ -16,6 +16,8 @@ class CardServiceProvider extends ServiceProvider
         include __DIR__.'/../Http/routes.php';
 
         $this->loadViewsFrom(__DIR__.'/../Resource/views','card');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'card');
+    
     }
 
     /**

@@ -95,7 +95,6 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\PayTR\\": "packages/Webkul/PayTR/src",
             "Webkul\\Card\\": "packages/Webkul/Card/src"
         }
     },
@@ -106,7 +105,6 @@
             "Webkul\\Core\\Tests\\": "packages/Webkul/Core/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests",
-            "Webkul\\PayTR\\": "src/",
             "Webkul\\Card\\": "src/"
         }
     },
@@ -127,7 +125,6 @@
                 "shetabit/visitor"
             ],
             "providers": [
-                "Webkul\\PayTR\\Providers\\PayTRServiceProvider",
                 "Webkul\\Card\\Providers\\CardServiceProvider"
             ]
         }

@@ -3,6 +3,7 @@ namespace Webkul\Card\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -143,10 +144,10 @@ class PaymentController
         $user_basket = base64_encode(json_encode($product_data));
 
         // Cart güncelleme
-        // $cart->merchand_oid = $merchant_oid;
+        // $cart->merchant_oid = $merchant_oid;
         // $cart->save(); 
         try {
-            $cart->merchand_oid = $merchant_oid;
+            $cart->merchant_oid = $merchant_oid;
             $cart->save();
         } catch (\Exception $e) {
             Log::error('Cart güncelleme hatası: ' . $e->getMessage());
@@ -165,11 +166,11 @@ class PaymentController
 
         // Diğer zorunlu alanlar
         $timeout_limit   = "30";
-        $debug_on        = 1;
+        $debug_on        = 0; 
         $test_mode       = 0;
         $no_installment  = 0;
         $max_installment = 0;
-        $currency        = "TL";
+        $currency        = "TL";  
 
         // Hash oluşturulması
         $hash_str = implode('', [
@@ -242,77 +243,106 @@ class PaymentController
     }
     public function paytr_payment_call(Request $request)
     {
-
+        try{
         // Gelen tüm POST verisini yakalama
-        $post = $request->all();
-        Log::info('PAYTR POST Data:', $post); 
-
-        $PAYTR_MERCHANT_ID="570396";
-        $PAYTR_MERCHANT_KEY="46JihJUD4NjYwxNu";
-        $PAYTR_MERCHANT_SALT="D7Na8UwqwrxuMnw6";
-        // Zorunlu alanlar - API Entegrasyon Bilgileri
-        $merchant_id    = $PAYTR_MERCHANT_ID;
-        $merchant_key   = $PAYTR_MERCHANT_KEY;
-        $merchant_salt  = $PAYTR_MERCHANT_SALT; 
-
-        // $merchant_key   = env('PAYTR_MERCHAND_KEY');
-        // $merchant_salt  = env('PAYTR_MERCHAND_SALT');
-
-        $hash = base64_encode(hash_hmac('sha256', data: $post['merchant_oid'] . $merchant_salt . $post['status'] . $post['total_amount'], key: $merchant_key, true));
-
-        if ($hash != $post['hash']) {
-            return response('PAYTR notification failed: bad hash', 400); 
-        }
-
-        $cart = \Webkul\Checkout\Models\Cart::where('merchand_oid', $post['merchant_oid'])->first();
+            $post1 = $request->all();
+            $post = json_decode(json_encode($post1), true);
+            Log::info('PAYTR POST Data:', $post1);  
+            Log::info('PayTR Callback başladı', ['data' => $post]);
+            Log::info('PayTR Callback merchant_oid ', ['merchant_oid' => $post['merchant_oid']]);
         
-        if (!$cart) {
-            session()->flash('error', trans('shop::app.checkout.cart.empty'));
-            return redirect()->route('shop.checkout.onepage.index');
-        }
+            $PAYTR_MERCHANT_ID="570396"; 
+            $PAYTR_MERCHANT_KEY="46JihJUD4NjYwxNu";  
+            $PAYTR_MERCHANT_SALT="D7Na8UwqwrxuMnw6";
+            // Zorunlu alanlar - API Entegrasyon Bilgileri
+            $merchant_id    = $PAYTR_MERCHANT_ID;
+            $merchant_key   = $PAYTR_MERCHANT_KEY;
+            $merchant_salt  = $PAYTR_MERCHANT_SALT; 
 
-        // Order data'yı oluşturma ve cart_id'yi güncelleme
+            // $merchant_key   = env('PAYTR_MERCHAND_KEY');
+            // $merchant_salt  = env('PAYTR_MERCHAND_SALT');
 
+            $hash_str = $post['merchant_oid'] . $merchant_salt . $post['status'] . $post['total_amount'];
+            $hash = base64_encode(hash_hmac('sha256', $hash_str, $merchant_key, true));
+            
 
-
-        if ($post['status'] == 'success') {
-            $order_check = Order::where('cart_id',$cart->id)->first();
-
-            $orderData = (new OrderResource($cart))->jsonSerialize();
-            $order = $this->orderRepository->create($orderData);
-            if ($order_check){
-                if ($order_check->status == 'pending'){
-                    $order->status = 'processing'; // HATA: $order tanımlı değil!
-                    $order->save();
-                    echo 'OK';
-                    exit();
-                }else {
-                    echo 'OK';
-                    exit();
-                }
+            // if ($hash != $post['hash']) {
+            //     Log::error('PayTR callback hash doğrulama hatası.');
+            //     echo 'OK';
+            //     exit(); 
+            //     // return false;  
+            // }
+            if ($hash != $post['hash']) { 
+                Log::error('PayTR callback hash doğrulama hatası.'); 
+                return response('PAYTR notification failed: bad hash', 400);  
             }
 
-            $order->status = 'processing';
-            $order->save();
-    
-            Log::info('Order :', $order);
-            echo "OK";
-            exit;
+            $cart = \Webkul\Checkout\Models\Cart::where('merchant_oid', $post['merchant_oid'])->first();
+            
+            if (!$cart) {
+                Log::error('PayTR callback cart bulunamadı.');
+                session()->flash('error', trans('shop::app.checkout.cart.empty'));
+                return redirect()->route('shop.checkout.onepage.index'); 
+            }
 
-        } else {
-            $order = $this->orderRepository->create($orderData);
-            $order->status = 'canceled';
-            $order->failed_reason_code = $post['failed_reason_code'] ?? null;
-            $order->failed_reason_msg = $post['failed_reason_msg'] ?? null;
-            $order->save();
-    
-            session()->flash('error', trans('shop::app.checkout.payment-failed'));
-            return redirect()->route('shop.checkout.onepage.index'); 
+            // Order data'yı oluşturma ve cart_id'yi güncelleme
+
+            $orderData = (new OrderResource($cart))->jsonSerialize();
+            if ($post['status'] == 'success') {
+                $existingOrder = Order::where('cart_id',$cart->id)->first();
+
+                if ($existingOrder){
+                    if ($existingOrder->status == 'pending'){
+                        $existingOrder->status = 'processing';
+                        $existingOrder->save(); 
+                        echo 'OK';
+                        exit();
+                    }else {
+                        echo 'OK';
+                        exit();
+                    } 
+                }else{
+                    $order = $this->orderRepository->create(data: $orderData);
+                    $order->status = 'processing'; // HATA: $order tanımlı değil!
+                    $order->save(); 
+                }
+                
+                Log::info('Order :', $order); 
+                echo "OK";
+                exit;
+
+            } else {
+                //         'canceled'        => 'İptal Edildi',
+                //         'closed'          => 'Kapatıldı',
+                //         'completed'       => 'Tamamlandı',
+                //         'fraud'           => 'Sahtekarlık',
+                //         'pending'         => 'Beklemede',
+                //         'pending-payment' => 'Ödeme Bekliyor',
+                //         'processing'      => 'İşleniyor',
+
+                // $order = $this->orderRepository->create(data: $orderData);
+                $existingOrder = Order::where('cart_id',$cart->id)->first();
+                $existingOrder->status = 'canceled';
+                $existingOrder->failed_reason_code = $post['failed_reason_code'] ?? null;
+                $existingOrder->failed_reason_msg = $post['failed_reason_msg'] ?? null;
+                $existingOrder->save(); 
+        
+                session()->flash('error', trans('shop::app.checkout.payment-failed'));
+                Log::info('Order :', $existingOrder);
+                echo "OK";
+                exit;
+                // return redirect()->route('shop.checkout.onepage.index'); 
+            }
+        } catch (\Exception $e) { 
+            Log::error('PAYTR Callback Hatası: ' . $e->getMessage()); 
+            echo 'OK';
+            exit();
+            return response('PAYTR notification failed: ' . $e->getMessage(), 500);
         }
-
-
+        echo 'OK';
+        exit();
     }
-
+ 
     public function paytr_payment_success()
     {
 
@@ -335,12 +365,21 @@ class PaymentController
             return redirect()->route('shop.checkout.onepage.index');
         }
 
-        $orderData = (new OrderResource($cart))->jsonSerialize();
-        $order = $this->orderRepository->create($orderData);
-        $order->status = 'canceled';
-        $order->failed_reason_code = $post['failed_reason_code'];
-        $order->failed_reason_msg = $post['failed_reason_msg'];
-        $order->save();
+        // $orderData = (new OrderResource($cart))->jsonSerialize();
+        $existingOrder = Order::where('cart_id', $cart->id)->first();
+        if ($existingOrder) {
+            $existingOrder->status = 'canceled';
+            $existingOrder->failed_reason_code = 'payment_failed';
+            $existingOrder->failed_reason_msg = 'Ödeme başarısız oldu.';
+            $existingOrder->save(); 
+        }
+        Log::info('PAYTR POST Data:', ['cart' => $cart, 'order' => $existingOrder,"status" => 'canceled',"failed_reason_code" => 'payment_failed', 'failed_reason_msg' => 'Ödeme başarısız oldu.']);
+        // $order = $this->orderRepository->create($orderData);
+        // $existingOrder = Order::where('cart_id',$cart->id)->first();
+        // $order->status = 'canceled'; 
+        // $order->failed_reason_code = $post['failed_reason_code'];
+        // $order->failed_reason_msg = $post['failed_reason_msg'];
+        // $order->save(); 
 
         session()->flash('error', trans('shop::app.checkout.payment-failed'));
         return redirect()->route('shop.checkout.onepage.index');
