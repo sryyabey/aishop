@@ -1031,8 +1031,7 @@
         
     </div>   
 
-
-        @push('scripts')
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     let faqItems = document.querySelectorAll('.ks-faq-item');
