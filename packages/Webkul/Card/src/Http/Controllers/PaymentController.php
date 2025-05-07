@@ -258,13 +258,13 @@ class PaymentController
         // $merchant_key   = env('PAYTR_MERCHAND_KEY');
         // $merchant_salt  = env('PAYTR_MERCHAND_SALT');
 
-        $hash = base64_encode(hash_hmac('sha256', $post['merchant_oid'] . $merchant_salt . $post['status'] . $post['total_amount'], $merchant_key, true));
+        $hash = base64_encode(hash_hmac('sha256', data: $post['merchant_oid'] . $merchant_salt . $post['status'] . $post['total_amount'], key: $merchant_key, true));
 
         if ($hash != $post['hash']) {
-            return response('PAYTR notification failed: bad hash', 400);
+            return response('PAYTR notification failed: bad hash', 400); 
         }
 
-        $cart = \Webkul\Checkout\Models\Cart::where('merchant_oid', $post['merchant_oid'])->first();
+        $cart = \Webkul\Checkout\Models\Cart::where('merchand_oid', $post['merchant_oid'])->first();
         
         if (!$cart) {
             session()->flash('error', trans('shop::app.checkout.cart.empty'));
