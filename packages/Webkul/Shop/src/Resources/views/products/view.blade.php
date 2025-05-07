@@ -525,24 +525,86 @@
     
      
     <!-- Related Products bölümünden önce ekleyin -->
-    <div class="container mt-10">
+    
         <!-- Özel HTML içeriği -->
         
-        @include('shop::products.view.ozel-html', ['product' => $product,"faqs"=>[
-            [
-                'question' => 'Pil ömrü ne kadar?',
-                'answer' => 'Tam şarjla 8 saate kadar kesintisiz kullanım sağlar.'
+        @include('shop::products.view.ozel-html', [
+            'product' => $product,
+            "faqs"=>[
+                [
+                    'question' => 'Pil ömrü ne kadar?',
+                    'answer' => 'Tam şarjla 8 saate kadar kesintisiz kullanım sağlar.'
+                ],
+                [
+                    'question' => 'Işık ayarları nasıl yapılır?',
+                    'answer' => 'Dokunmatik kontrol paneli üzerinden 7 farklı renk ve 3 farklı parlaklık seviyesi ayarlanabilir.'
+                ],
+                [
+                    'question' => 'Garanti süresi nedir?',
+                    'answer' => '2 yıl resmi distribütör garantisi mevcuttur.'
+                ],
             ],
-            [
-                'question' => 'Işık ayarları nasıl yapılır?',
-                'answer' => 'Dokunmatik kontrol paneli üzerinden 7 farklı renk ve 3 farklı parlaklık seviyesi ayarlanabilir.'
+            "product_detail" => [
+                'buy-now' => 'Hemen Satın Al',
+                'features-title' => 'Büyüleyici Özellikler',
+                'features-description' => 'Ayarlanabilir ışık modları ve yıldız projeksiyon efektleri ile size huzurlu bir ortam sunar.',
+                'why-choose' => 'Neden Starlink Gece Lambası?',
+                'why-description' => 'Göz yormayan yumuşak ışıklar ve sessiz çalışma özelliğiyle, gece konforunuz için tasarlandı.',
+                'user-experiences' => 'Kullanıcı Deneyimleri',
+                'faq-title' => 'Sık Sorulan Sorular',
+                'faq-subtitle' => 'Hakkında Bilmek İstedikleriniz',
+
+                'features-product' => 'Starlink Lamba',
+                'features-other' => 'Diğer Lambalar',
+
+                'section-title' => 'Keyifli Geceler İçin Tasarlandı',
+                'section-desc' => 'Starlink Gece Lambası, yumuşak ışığı ve göz alıcı efektleriyle yatak odanızı huzurlu bir atmosfere dönüştürür. USB şarj özelliği ve kolay kullanımı ile her yaştan kullanıcı için ideal.',
             ],
-            [
-                'question' => 'Garanti süresi nedir?',
-                'answer' => '2 yıl resmi distribütör garantisi mevcuttur.'
-            ],
-        ]])
-    </div>
+            "benefits" => [ 
+                [
+                    'icon' => '🌟',
+                    'title' => '360° Projeksiyon',
+                    'desc' => 'Tam dönebilen gökyüzü yansıtma özelliği',
+                ],
+                [
+                    'icon' => '🌙',
+                    'title' => 'Galaksi Efektleri',
+                    'desc' => 'Ay, yıldızlar ve galaksi efekti bir arada',
+                ],
+                [
+                    'icon' => '🔋',
+                    'title' => 'Uzun Pil Ömrü',
+                    'desc' => 'Tam şarjla 8 saate kadar kesintisiz kullanım',
+                ],
+                [
+                    'icon' => '🛠️',
+                    'title' => 'Kolay Kurulum',
+                    'desc' => 'Hızlı ve pratik montaj için tasarlandı',
+                ]
+                ],
+            "features" => [ 
+                [
+                    'title' => '360° Projeksiyon',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'LED Teknolojisi',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Sessiz Çalışma',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Uzun Pil Ömrü',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                ],
+        ])
     
         
     
