@@ -17,7 +17,7 @@
         <title>{{ $title ?? '' }}</title>
 
         <meta charset="UTF-8">
-
+        <meta name="facebook-domain-verification" content="tdptmlbuk430r6lesgchyok7f41pfs" />
         <meta
             http-equiv="X-UA-Compatible"
             content="IE=edge"
@@ -77,6 +77,36 @@
         </style>
 
         {!! view_render_event('bagisto.shop.layout.head.after') !!}
+    
+        
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1201547918230082');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1201547918230082&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NYR1PJB32"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7NYR1PJB32');
+</script>
 
     </head>
 

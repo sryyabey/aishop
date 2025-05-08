@@ -829,14 +829,15 @@
         }
     }
 </style>
+
 @endpush
 <div class="ks-reset ks-body" style="margin-top: 50px;"> 
         <!-- Hero Section -->
         <section class="ks-hero">
         <div class="ks-container">
         <h2 class="ks-hero-title">{{ $product->name ?? '' }}</h2>
-            <p class="ks-hero-subtitle">Hayal gücünüzü gökyüzüne taşıyan benzersiz bir gece lambası! Odanızı adeta bir galaksiye dönüştürerek sizi bambaşka bir atmosferle buluşturur.</p>
-            <button class="ks-btn" id="ksHeroButton">Hemen Keşfet</button>
+            <p class="ks-hero-subtitle">{{ $product_detail["hero-subtitle"] }}</p>
+            <button class="ks-btn" id="ksHeroButton">{{ $product_detail["buy-now_second"] }}</button>
         </div>
     </section>
     
@@ -850,7 +851,7 @@
         
         <div class="ks-benefits-content">
             <div class="ks-benefits-column">
-            @foreach ($benefits as $key => $benefitItem)
+            @foreach ($product_detail["benefits"] as $key => $benefitItem)
                 @if ($key < 2)
                     <div class="ks-benefit-item">
                         <div class="ks-benefit-icon">{{ $benefitItem["icon"]}}</div>
@@ -870,7 +871,7 @@
             </div>
             
             <div class="ks-benefits-column">
-                @foreach ($benefits as $key => $benefitItem)
+                @foreach ($product_detail["benefits"] as $key => $benefitItem)
                     @if ($key > 1)
                         <div class="ks-benefit-item">
                             <div class="ks-benefit-icon">{{ $benefitItem["icon"]}}</div>
@@ -901,7 +902,7 @@
             </div>
             <div class="ks-comparison-table">
 
-                @foreach ($features as $key => $featuresItem)
+                @foreach ($product_detail["features"] as $key => $featuresItem)
                   <div class="ks-table-row">
                       <div class="ks-table-feature">{{ $featuresItem["title"] }}</div>
                       <div class="ks-table-value">
@@ -928,49 +929,28 @@
           </div>
           
           <div class="ks-stats-content">
-            <h2 class="ks-stats-title">Kullanıcı Deneyimleri</h2>
+            <h2 class="ks-stats-title">{{$product_detail["percentages_title"]}}</h2>
         
             <div class="ks-stats-list">
+
+
+            @foreach ($product_detail["percentages"] as $percentagesItem)
               <div class="ks-stat-item">
-                <div class="ks-circular-progress" data-percentage="97">
+                <div class="ks-circular-progress" data-percentage="{{$percentagesItem["oran"]}}">
                   <div class="ks-circle-container">
                     <svg class="ks-circle-progress" width="80" height="80" viewBox="0 0 80 80">
                       <circle class="ks-circle-bg" cx="40" cy="40" r="36" />
                       <circle class="ks-circle-fill" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="226.2" />
                     </svg>
-                    <div class="ks-percentage">97%</div>
+                    <div class="ks-percentage">{{$percentagesItem["oran"]}}%</div>
                   </div>
                 </div>
-                <p class="ks-stat-description">Uyku kalitesinde artış yaşadı</p>
+                <p class="ks-stat-description">{{$percentagesItem["title"]}}</p>
               </div>
               <div class="ks-stat-divider"></div>
-              
-              <div class="ks-stat-item">
-                <div class="ks-circular-progress" data-percentage="96">
-                  <div class="ks-circle-container">
-                    <svg class="ks-circle-progress" width="80" height="80" viewBox="0 0 80 80">
-                      <circle class="ks-circle-bg" cx="40" cy="40" r="36" />
-                      <circle class="ks-circle-fill" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="226.2" />
-                    </svg>
-                    <div class="ks-percentage">96%</div>
-                  </div>
-                </div>
-                <p class="ks-stat-description">Rahatlatıcı etkisinden memnun kaldı</p>
-                </div>
-              <div class="ks-stat-divider"></div>
-              
-              <div class="ks-stat-item">
-                <div class="ks-circular-progress" data-percentage="98">
-                  <div class="ks-circle-container">
-                    <svg class="ks-circle-progress" width="80" height="80" viewBox="0 0 80 80">
-                      <circle class="ks-circle-bg" cx="40" cy="40" r="36" />
-                      <circle class="ks-circle-fill" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="226.2" />
-                    </svg>
-                    <div class="ks-percentage">98%</div>
-                  </div>
-                </div>
-                <p class="ks-stat-description">Tekrar satın almayı düşünüyor</p>
-                </div>
+            @endforeach
+
+
             </div>
             
             <button class="ks-btn" id="ksStatsButton">{{ $product_detail["buy-now"] }}</button>
@@ -1005,7 +985,7 @@
           </div>
           
           <div class="ks-faq-container" >
-              @foreach ($faqs as $faq)
+              @foreach ($product_detail["faqs"] as $faq)
               <div class="ks-faq-item">
                   <div class="ks-faq-question">
                       <h3 class="text-lg font-medium">{{ $faq['question'] }}</h3>
@@ -1083,6 +1063,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: 'smooth'
             });
         });
+    });
+
+
+
+    const circles = document.querySelectorAll('.ks-circular-progress');
+    
+    circles.forEach(circle => {
+        const percentage = circle.getAttribute('data-percentage');
+        const circleFill = circle.querySelector('.ks-circle-fill');
+        const circumference = 2 * Math.PI * 36; // r=36 olan daire için çevre uzunluğu
+        
+        // Başlangıçta gizli
+        circleFill.style.strokeDasharray = circumference;
+        circleFill.style.strokeDashoffset = circumference;
+        
+        // IntersectionObserver ile görünür olduğunda animasyon başlat
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Yüzdeye göre stroke-dashoffset hesapla
+                    const offset = circumference - (percentage / 100 * circumference);
+                    circleFill.style.strokeDashoffset = offset;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(circle);
     });
 });
 </script>
