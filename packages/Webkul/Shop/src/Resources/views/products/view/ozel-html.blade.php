@@ -435,134 +435,6 @@
         margin: 5px 0;
     }
     
-    /* FAQ section */
-    .ks-faq-section {
-        max-width: 1200px;
-        margin: 80px auto;
-        padding: 0 20px;
-        background-color: white;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-    }
-    
-    .ks-faq-header {
-        text-align: center;
-        margin-bottom: 50px;
-        padding: 40px;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        color: white;
-        position: relative;
-        overflow: hidden;
-        border-radius: 0 0 20px 20px;
-    }
-    
-    .ks-faq-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="white" opacity="0.3"/><circle cx="30" cy="40" r="0.5" fill="white" opacity="0.3"/><circle cx="50" cy="20" r="0.8" fill="white" opacity="0.3"/><circle cx="70" cy="50" r="0.4" fill="white" opacity="0.3"/><circle cx="90" cy="30" r="0.6" fill="white" opacity="0.3"/></svg>');
-        opacity: 0.2;
-    }
-    
-    .ks-faq-title {
-        font-size: 36px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: white;
-        position: relative;
-        z-index: 1;
-    }
-    
-    .ks-faq-subtitle {
-        font-size: 18px;
-        max-width: 700px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-    }
-    
-    .ks-faq-container {
-        margin: 0 auto;
-        max-width: 800px;
-        padding: 0 20px 40px;
-    }
-    
-    .ks-faq-item {
-        background: #fff;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        border: 1px solid #eee;
-        overflow: hidden;
-    }
-    
-    .ks-faq-question {
-        padding: 22px 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        transition: all 0.3s ease;
-    }
-    
-    .ks-faq-question:hover {
-        background-color: rgba(79, 172, 254, 0.05);
-    }
-    
-    .ks-faq-question h3 {
-        font-size: 18px;
-        margin: 0;
-        color: #1a1a2e;
-        transition: color 0.3s ease;
-    }
-    
-    .ks-faq-item.active .ks-faq-question h3 {
-        color: #4facfe;
-    }
-    
-    .ks-faq-answer {
-        padding: 0;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        opacity: 0;
-        background-color: #f9f9f9;
-    }
-    
-    .ks-faq-item.active .ks-faq-answer {
-        padding: 20px 25px;
-        max-height: 500px;
-        opacity: 1;
-    }
-    
-    .ks-faq-arrow {
-        transition: transform 0.4s ease;
-        fill: #1a1a2e;
-    }
-    
-    .ks-faq-item.active .ks-faq-arrow {
-        transform: rotate(180deg);
-        fill: #4facfe;
-    }
-    
-    .ks-faq-answer p {
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        line-height: 1.8;
-        color: #555;
-    }
-    
-    .ks-faq-cta {
-        text-align: center;
-        margin: 50px 0;
-    }
-    
     /* Footer */
     .ks-footer {
         background-color: #1a1a2e;
@@ -829,7 +701,135 @@
         }
     }
 </style>
-
+<style>
+     /* FAQ section */
+     .ks-faq-section {
+        max-width: 1200px;
+        margin: 80px auto;
+        padding: 0 20px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .ks-faq-header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 40px;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    .ks-faq-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="white" opacity="0.3"/><circle cx="30" cy="40" r="0.5" fill="white" opacity="0.3"/><circle cx="50" cy="20" r="0.8" fill="white" opacity="0.3"/><circle cx="70" cy="50" r="0.4" fill="white" opacity="0.3"/><circle cx="90" cy="30" r="0.6" fill="white" opacity="0.3"/></svg>');
+        opacity: 0.2;
+    }
+    
+    .ks-faq-title {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: white;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .ks-faq-subtitle {
+        font-size: 18px;
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .ks-faq-container {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 0 20px 40px;
+    }
+    
+    .ks-faq-item {
+        background: #fff;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        border: 1px solid #eee;
+        overflow: hidden;
+    }
+    
+    .ks-faq-question {
+        padding: 22px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.3s ease;
+    }
+    
+    .ks-faq-question:hover {
+        background-color: rgba(79, 172, 254, 0.05);
+    }
+    
+    .ks-faq-question h3 {
+        font-size: 18px;
+        margin: 0;
+        color: #1a1a2e;
+        transition: color 0.3s ease;
+    }
+    
+    .ks-faq-item.active .ks-faq-question h3 {
+        color: #4facfe;
+    }
+    
+    .ks-faq-answer {
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        opacity: 0;
+        background-color: #f9f9f9;
+    }
+    
+    .ks-faq-item.active .ks-faq-answer {
+        padding: 20px 25px;
+        max-height: 500px;
+        opacity: 1;
+    }
+    
+    .ks-faq-arrow {
+        transition: transform 0.4s ease;
+        fill: #1a1a2e;
+    }
+    
+    .ks-faq-item.active .ks-faq-arrow {
+        transform: rotate(180deg);
+        fill: #4facfe;
+    }
+    
+    .ks-faq-answer p {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #555;
+    }
+    
+    .ks-faq-cta {
+        text-align: center;
+        margin: 50px 0;
+    }
+</style>
 @endpush
 <div class="ks-reset ks-body" style="margin-top: 50px;"> 
         <!-- Hero Section -->
@@ -1013,47 +1013,7 @@
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    let faqItems = document.querySelectorAll('.ks-faq-item');
-    let touchStartY = 0;
-    
-    faqItems.forEach(function(item) {
-        let question = item.querySelector('.ks-faq-question');
-        let answer = item.querySelector('.ks-faq-answer');
-        
-        // Dokunmatik olayları
-        question.addEventListener('touchstart', function(e) {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        question.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        });
-
-        question.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            let isActive = item.classList.contains('active');
-            
-            // Diğer tüm FAQ öğelerini kapat
-            faqItems.forEach(function(otherItem) {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    let otherAnswer = otherItem.querySelector('.ks-faq-answer');
-                    otherAnswer.style.maxHeight = '0';
-                }
-            });
-            
-            // Tıklanan öğeyi aç/kapat
-            item.classList.toggle('active');
-            
-            if (!isActive) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            } else {
-                answer.style.maxHeight = '0';
-            }
-        });
-    });
+document.addEventListener("DOMContentLoaded", function () {
 
     // Sayfa yüklendiğinde smooth scroll için
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1094,4 +1054,48 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+    let faqItems = document.querySelectorAll('.ks-faq-item');
+    let touchStartY = 0;
+    
+    faqItems.forEach(function(item) {
+        let question = item.querySelector('.ks-faq-question');
+        let answer = item.querySelector('.ks-faq-answer');
+        
+        // Dokunmatik olayları
+        question.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        question.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        });
+
+        question.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            let isActive = item.classList.contains('active');
+            
+            // Diğer tüm FAQ öğelerini kapat
+            faqItems.forEach(function(otherItem) {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    let otherAnswer = otherItem.querySelector('.ks-faq-answer');
+                    otherAnswer.style.maxHeight = '0';
+                }
+            });
+            
+            // Tıklanan öğeyi aç/kapat
+            item.classList.toggle('active');
+            
+            if (!isActive) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = '0';
+            }
+        });
+    });
+    });
+</script>  
 @endpush

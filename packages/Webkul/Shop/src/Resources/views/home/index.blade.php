@@ -19,7 +19,7 @@
         content="{{ $channel->home_seo['meta_keywords'] ?? '' }}"
     />
 @endPush
-
+@include('shop::home.header-ticker', []) 
 <x-shop::layouts>
     <!-- Page Title -->
     <x-slot:title>
