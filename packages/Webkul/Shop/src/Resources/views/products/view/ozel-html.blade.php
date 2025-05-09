@@ -895,7 +895,7 @@
             <p class="ks-comparison-description">
             {{ $product_detail["why-description"] }}
            </p>
-            <button class="ks-btn" id="ksComparisonButton">{{ $product_detail["buy-now"] }}</button>
+            <a href="#"  class="ks-btn" id="ksComparisonButton">{{ $product_detail["buy-now"] }}</a>
           </div>
           
           <div class="ks-comparison-right">
@@ -976,9 +976,10 @@
 
 
             </div>
-            
-            <button class="ks-btn" id="ksStatsButton">{{ $product_detail["buy-now"] }}</button>
+            <div class="ks-faq-cta" >
+            <a href="#"  class="ks-btn" id="ksStatsButton">{{ $product_detail["buy-now"] }}</a>
           </div>
+             </div>
         </section>
         @include('shop::home.header-ticker', []) 
         <!-- Second Feature Section -->
@@ -1025,7 +1026,7 @@
           </div>
           
           <div class="ks-faq-cta" >
-            <button  class="ks-btn" id="ksFaqButton">{{ $product_detail["buy-now"] }}</button>
+            <a href="#"  class="ks-btn" id="ksFaqButton">{{ $product_detail["buy-now"] }}</a>
           </div>
         </section>
         

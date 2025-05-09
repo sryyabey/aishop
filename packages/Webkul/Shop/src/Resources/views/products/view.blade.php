@@ -354,10 +354,6 @@
 
     'faqs' => [
         [
-            'question' => 'Bileziğin çapı nedir?',
-            'answer'   => 'Yaklaşık 6.5 cm çapında olup 21 cm iç çevreye sahiptir.', 
-        ],
-        [
             'question' => 'Malzemesi nedir?',
             'answer'   => '316L paslanmaz çelik, özel altın kaplamalıdır.', 
         ],
