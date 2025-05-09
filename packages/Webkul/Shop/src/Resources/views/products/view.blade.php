@@ -53,6 +53,9 @@
 <!-- Page Layout -->
 <x-shop::layouts>
     <!-- Page Title -->
+    <script>
+    fbq('track', 'ViewContent'); //sayfa görüntüleme
+    </script>
     
     <x-slot:title>
         {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
@@ -811,6 +814,7 @@
 
                 methods: {
                     addToCart(params) {
+                        fbq('track', 'AddToCart'); //sepete ekleme
                         const operation = this.is_buy_now ? 'buyNow' : 'addToCart';
 
                         this.isStoring[operation] = true;
@@ -847,6 +851,8 @@
                     },
 
                     addToWishlist() {
+
+                        fbq('track', 'AddToWishlist'); //dilek listesine ekleme
                         if (this.isCustomer) {
                             this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
                                     product_id: "{{ $product->id }}"

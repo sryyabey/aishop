@@ -289,7 +289,7 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                     
                     // Create form data and submit
                     const formData = new FormData(form);
-                    
+                    fbq('track', 'AddToCart');
                     fetch(form.action, {
                         method: 'POST',
                         body: formData,

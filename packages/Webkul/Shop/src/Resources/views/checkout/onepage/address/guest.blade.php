@@ -12,6 +12,9 @@
 @include('shop::checkout.onepage.address.form')
 
 @pushOnce('scripts')
+<script>
+    fbq('track', 'InitiateCheckout');//alışveriş başlatma
+    </script>
     <script
         type="text/x-template"
         id="v-checkout-address-guest-template"

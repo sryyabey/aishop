@@ -13,6 +13,10 @@
 {!! view_render_event('bagisto.shop.checkout.onepage.address.customer.after') !!}
 
 @pushOnce('scripts')
+<script>
+
+fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+    </script>
     <script
         type="text/x-template"
         id="v-checkout-address-customer-template"

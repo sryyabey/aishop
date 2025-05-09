@@ -3,6 +3,10 @@
 	:has-feature="false"
 	:has-footer="true"
 >
+<script>
+
+fbq('track', 'Purchase');//aışvriş genel
+    </script>
     <!-- Page Title -->
     <x-slot:title>
 		@lang('shop::app.checkout.success.thanks')

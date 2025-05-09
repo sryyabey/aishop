@@ -434,6 +434,7 @@
                 },
 
                 addToCart(params) {
+                    fbq('track', 'AddToCart');
                     this.$emit('add-to-cart', {
                         product: this.searchedProducts.find(product => product.id == params.product_id),
                         qty: params.qty

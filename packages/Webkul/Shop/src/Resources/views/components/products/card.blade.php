@@ -350,6 +350,7 @@
 
             methods: {
                 addToWishlist() {
+                    fbq('track', 'AddToWishlist');
                     if (this.isCustomer) {
                         this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
                                 product_id: this.product.id
@@ -421,8 +422,11 @@
 
                     return JSON.parse(value);
                 },
-
+                
                 addToCart() {
+                    fbq('track', 'AddToCart'); //sepete ekleme
+                    
+            
                     this.isAddingToCart = true;
 
                     this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
