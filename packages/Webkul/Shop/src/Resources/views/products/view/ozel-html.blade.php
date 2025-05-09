@@ -311,129 +311,7 @@
         font-weight: bold;
     }
     
-    /* Stats section */
-    .ks-stats-container {
-        display: flex;
-        max-width: 1200px;
-        margin: 80px auto;
-        gap: 60px;
-        padding: 0 20px;
-        align-items: center;
-    }
-    
-    .ks-stats-image {
-        flex: 1;
-        min-width: 300px;
-        position: relative;
-        animation: fadeInLeft 1s ease-out;
-    }
-    
-    .ks-stats-image img {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        object-fit: cover;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        transition: all 0.5s ease;
-    }
-    
-    .ks-stats-image:hover img {
-        transform: scale(1.03);
-    }
-    
-    .ks-stats-content {
-        flex: 1;
-        min-width: 300px;
-        display: flex;
-        flex-direction: column;
-        animation: fadeInRight 1s ease-out;
-    }
-    
-    .ks-stats-title {
-        font-size: 36px;
-        font-weight: 700;
-        margin-bottom: 40px;
-        color: #1a1a2e;
-        position: relative;
-        padding-bottom: 15px;
-    }
-    
-    .ks-stats-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 4px;
-        width: 80px;
-        background: linear-gradient(135deg, #00f2fe, #4facfe);
-        border-radius: 2px;
-    }
-    
-    .ks-stats-list {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        margin-bottom: 40px;
-    }
-    
-    .ks-stat-item {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-        padding: 5px 0;
-    }
-    
-    .ks-circular-progress {
-        position: relative;
-        width: 90px;
-        height: 90px;
-    }
-    
-    .ks-circle-container {
-        position: relative;
-        width: 90px;
-        height: 90px;
-    }
-    
-    .ks-circle-bg {
-        fill: none;
-        stroke: #e6e6e6;
-        stroke-width: 6;
-    }
-    
-    .ks-circle-fill {
-        fill: none;
-        stroke: url(#gradient);
-        stroke-width: 6;
-        stroke-linecap: round;
-        transform: rotate(-90deg);
-        transform-origin: center;
-        transition: stroke-dashoffset 1.5s ease-in-out;
-    }
-    
-    .ks-percentage {
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 22px;
-        font-weight: 700;
-        color: #1a1a2e;
-    }
-    
-    .ks-stat-description {
-        flex: 1;
-        font-size: 18px;
-        line-height: 1.5;
-        margin: 0;
-        color: #444;
-    }
-    
-    .ks-stat-divider {
-        height: 1px;
-        background: linear-gradient(90deg, rgba(0,242,254,0.2), rgba(79,172,254,0.2), rgba(0,242,254,0.2));
-        margin: 5px 0;
-    }
+  
     
     /* Footer */
     .ks-footer {
@@ -830,6 +708,132 @@
         margin: 50px 0;
     }
 </style>
+<style>
+  /* Stats section */
+  .ks-stats-container {
+        display: flex;
+        max-width: 1200px;
+        margin: 80px auto;
+        gap: 60px;
+        padding: 0 20px;
+        align-items: center;
+    }
+    
+    .ks-stats-image {
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+        animation: fadeInLeft 1s ease-out;
+    }
+    
+    .ks-stats-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        transition: all 0.5s ease;
+    }
+    
+    .ks-stats-image:hover img {
+        transform: scale(1.03);
+    }
+    
+    .ks-stats-content {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        animation: fadeInRight 1s ease-out;
+    }
+    
+    .ks-stats-title {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 40px;
+        color: #1a1a2e;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    
+    .ks-stats-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 80px;
+        background: linear-gradient(135deg, #00f2fe, #4facfe);
+        border-radius: 2px;
+    }
+    
+    .ks-stats-list {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .ks-stat-item {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        padding: 5px 0;
+    }
+    
+    .ks-circular-progress {
+        position: relative;
+        width: 90px;
+        height: 90px;
+    }
+    
+    .ks-circle-container {
+        position: relative;
+        width: 90px;
+        height: 90px;
+    }
+    
+    .ks-circle-bg {
+        fill: none;
+        stroke: #e6e6e6;
+        stroke-width: 6;
+    }
+    
+    .ks-circle-fill {
+        fill: none;
+        stroke: url(#gradient);
+        stroke-width: 6;
+        stroke-linecap: round;
+        transform: rotate(-90deg);
+        transform-origin: center;
+        transition: stroke-dashoffset 1.5s ease-in-out;
+    }
+    
+    .ks-percentage {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a1a2e;
+    }
+    
+    .ks-stat-description {
+        flex: 1;
+        font-size: 18px;
+        line-height: 1.5;
+        margin: 0;
+        color: #444;
+    }
+    
+    .ks-stat-divider {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0,242,254,0.2), rgba(79,172,254,0.2), rgba(0,242,254,0.2));
+        margin: 5px 0;
+    }
+
+</style>
 @endpush
 <div class="ks-reset ks-body" style="margin-top: 50px;"> 
         <!-- Hero Section -->
@@ -938,10 +942,30 @@
               <div class="ks-stat-item">
                 <div class="ks-circular-progress" data-percentage="{{$percentagesItem["oran"]}}">
                   <div class="ks-circle-container">
-                    <svg class="ks-circle-progress" width="80" height="80" viewBox="0 0 80 80">
-                      <circle class="ks-circle-bg" cx="40" cy="40" r="36" />
-                      <circle class="ks-circle-fill" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="226.2" />
+                  <div class="ks-circular-progress" data-percentage="75">
+                  <svg width="0" height="0">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00f2fe" />
+                        <stop offset="100%" stop-color="#4facfe" />
+                        </linearGradient>
+                    </defs>
                     </svg>
+                    <svg viewBox="0 0 100 100" class="ks-svg">
+                        <circle cx="50" cy="50" r="36" fill="none" stroke="#e6e6e6" stroke-width="8" />
+                        <circle
+                        cx="50"
+                        cy="50"
+                        r="36"
+                        fill="none"
+                        class="ks-circle-fill"
+                        stroke="url(#gradient)"
+                        stroke-width="8"
+                        stroke-linecap="round"
+                        transform="rotate(-90 50 50)"
+                        />
+                    </svg>
+                    </div>
                     <div class="ks-percentage">{{$percentagesItem["oran"]}}%</div>
                   </div>
                 </div>
@@ -956,7 +980,7 @@
             <button class="ks-btn" id="ksStatsButton">{{ $product_detail["buy-now"] }}</button>
           </div>
         </section>
-        
+        @include('shop::home.header-ticker', []) 
         <!-- Second Feature Section -->
         <section class="ks-section">
           <div class="ks-container">
@@ -985,22 +1009,19 @@
           </div>
           
           <div class="ks-faq-container" >
-              @foreach ($product_detail["faqs"] as $faq)
-              <div class="ks-faq-item">
-                  <div class="ks-faq-question">
-                      <h3 class="text-lg font-medium">{{ $faq['question'] }}</h3>
-                      <span class="ks-faq-arrow"> 
-                          
-                          <svg class="ks-faq-arrow" width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+            @foreach ($product_detail["faqs"] as $index => $faq)
+                <div class="ks-faq-item" id="faq-item-{{ $index }}">
+                    <div class="ks-faq-question" onclick="toggleFaq({{ $index }})">
+                        <h3>{{ $faq['question'] }}</h3>
+                        <svg class="ks-faq-arrow" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z" />
                         </svg>
-                      </span>
-                  </div>
-                  <div class="ks-faq-answer">
-                      <p>{{ $faq['answer'] }}</p>
-                  </div>
-              </div>
-              @endforeach
+                    </div>
+                    <div class="ks-faq-answer">
+                        <p>{{ $faq['answer'] }}</p>
+                    </div>
+                </div>
+            @endforeach
           </div>
           
           <div class="ks-faq-cta" >
@@ -1027,75 +1048,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    const circles = document.querySelectorAll('.ks-circular-progress');
     
-    circles.forEach(circle => {
-        const percentage = circle.getAttribute('data-percentage');
-        const circleFill = circle.querySelector('.ks-circle-fill');
-        const circumference = 2 * Math.PI * 36; // r=36 olan daire için çevre uzunluğu
-        
-        // Başlangıçta gizli
-        circleFill.style.strokeDasharray = circumference;
-        circleFill.style.strokeDashoffset = circumference;
-        
-        // IntersectionObserver ile görünür olduğunda animasyon başlat
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Yüzdeye göre stroke-dashoffset hesapla
-                    const offset = circumference - (percentage / 100 * circumference);
-                    circleFill.style.strokeDashoffset = offset;
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        observer.observe(circle);
-    });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const progressElements = document.querySelectorAll(".ks-circular-progress");
+
+    progressElements.forEach(el => {
+      const percentage = parseInt(el.getAttribute("data-percentage")) || 0;
+      const circle = el.querySelector(".ks-circle-fill");
+
+      const radius = 36;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (percentage / 100) * circumference;
+
+      circle.style.strokeDasharray = `${circumference}`;
+      circle.style.strokeDashoffset = `${offset}`;
+    });
+  });
 </script>
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    let faqItems = document.querySelectorAll('.ks-faq-item');
-    let touchStartY = 0;
-    
-    faqItems.forEach(function(item) {
-        let question = item.querySelector('.ks-faq-question');
-        let answer = item.querySelector('.ks-faq-answer');
-        
-        // Dokunmatik olayları
-        question.addEventListener('touchstart', function(e) {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
+function toggleFaq(index) {
+    const clickedItem = document.getElementById(`faq-item-${index}`);
+    const allItems = document.querySelectorAll('.ks-faq-item');
 
-        question.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        });
+    // Diğer tüm açıkları kapat
+    allItems.forEach(item => {
+        if (item !== clickedItem) {
+            item.classList.remove('active');
+        }
+    });
 
-        question.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            let isActive = item.classList.contains('active');
-            
-            // Diğer tüm FAQ öğelerini kapat
-            faqItems.forEach(function(otherItem) {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    let otherAnswer = otherItem.querySelector('.ks-faq-answer');
-                    otherAnswer.style.maxHeight = '0';
-                }
-            });
-            
-            // Tıklanan öğeyi aç/kapat
-            item.classList.toggle('active');
-            
-            if (!isActive) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            } else {
-                answer.style.maxHeight = '0';
-            }
-        });
-    });
-    });
-</script>  
+    // Tıklanan öğeyi aç/kapat
+    clickedItem.classList.toggle('active');
+}
+</script>
 @endpush

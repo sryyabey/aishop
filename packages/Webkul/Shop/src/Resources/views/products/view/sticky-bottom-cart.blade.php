@@ -6,17 +6,42 @@
     right: 0;
     background-color: rgba(255, 255, 255, 0.98);
     padding: 12px 20px;
-    z-index: 9999;
+    z-index: 48;
     box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(8px);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     animation: slideUp 0.5s forwards ease-in-out;
-    display: flex;
+    display: none!important;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: 15px; 
+    opacity: 0;
+    transform: translateY(100%);
+    
+}
+/* Mobil görünüm için medya sorgusu */
+@media screen and (max-width: 767px) {
+    .sticky-cart-animate {
+        display: flex; /* Sadece mobilde göster */
+    }
+}
+/* Tablet ve masaüstü için gizle */
+@media screen and (min-width: 768px) {
+    .sticky-cart-animate {
+        display: none !important;
+    }
+}
+/* JavaScript kontrolü için */
+.sticky-cart-animate.hide {
+    display: none !important;
 }
 
+.sticky-cart-animate.show {
+    display: flex !important;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
 .sticky-cart-animate .product-info {
     display: flex;
     align-items: center;
@@ -109,6 +134,35 @@
 .sticky-cart-button:disabled {
     @apply opacity-50 cursor-not-allowed;
 }
+.primary-button {
+    @apply bg-gradient-to-r from-pink-500 to-rose-500 
+           text-white font-medium
+           hover:from-pink-600 hover:to-rose-600
+           focus:ring-2 focus:ring-rose-400
+           disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.secondary-button {
+    @apply bg-gradient-to-r from-indigo-500 to-blue-500
+           text-white font-medium
+           hover:from-indigo-600 hover:to-blue-600
+           focus:ring-2 focus:ring-blue-400
+           disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Buton container için responsive düzenlemeler */
+@media (max-width: 360px) {
+    .sticky-cart-button-container .flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .sticky-cart-button-container form {
+        width: 100%;
+    }
+}
+
+
 @media (max-width: 768px) {
     .sticky-cart-button {
         padding: 10px 16px;
@@ -121,24 +175,13 @@
            border-2 border-white border-t-transparent 
            rounded-full animate-spin;
 }
+body[style*="overflow: hidden"] .sticky-cart-animate {
+    display: none !important;
+}
 
 </style>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const stickyCart = document.querySelector('.sticky-cart-animate');
-        stickyCart.style.display = 'none';
 
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > 300) {
-                stickyCart.style.display = 'block';
-            } else {
-                stickyCart.style.display = 'none'; 
-            }
-        });
-    });
-</script>
-
-<!--<div class="sticky-cart-animate block md:hidden" v-scope>
+<div class="sticky-cart-animate block md:hidden" v-scope>
     
     <div class="sticky-cart-button-container ml-auto" style="width: 100%;">
         <div class="product-info flex-1">
@@ -152,6 +195,7 @@
                 <div class="product-price">{!! $product->getTypeInstance()->getPriceHtml() !!}</div>
             </div>
         </div>
+        <div class="flex gap-2 mt-3"></div>
         <form
             method="POST" 
             action="{{ route('shop.api.checkout.cart.store') }}"
@@ -161,7 +205,7 @@
                 
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="is_buy_now" :value="is_buy_now">
+                <input type="hidden" name="is_buy_now" :value="0">
 
                 <button 
                     type="submit"
@@ -183,15 +227,48 @@
                     @lang('shop::app.products.view.add-to-cart')
                 </button>
             </form>
+            <!-- Hemen Al Butonu -->
+        <!--<form
+            method="POST" 
+            action="{{ route('shop.api.checkout.cart.store') }}"
+            @submit.prevent="onSubmit($event)"
+            class="w-1/2"
+        >
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="is_buy_now" :value="1">
+
+            <button 
+                type="submit"
+                class="primary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                :disabled="isStoring.buyNow"
+                 button-type="secondary-button"
+                 @click="is_buy_now=1;"
+            >
+                <span class="loading-spin" v-show="isStoring.buyNow"></span>
+                <span class="icon-lightning text-lg mr-2"></span>
+                @lang('shop::app.products.view.buy-now')
+            </button>
+        </form>-->
+        </div>
     </div>
-</div>-->
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const stickyCart = document.querySelector('.sticky-cart-animate');
         
         if (stickyCart) {
-            stickyCart.style.display = 'none';
+            stickyCart.classList.remove('show');
+             // Mobil kontrolü
+            const isMobile = window.innerWidth < 768;
+        
+            
+            if (!isMobile) {
+                stickyCart.style.display = 'none';
+                return;
+            }
             
             let isAddingToCart = false;
             
@@ -251,13 +328,27 @@
                 });
             }
 
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 300) {
-                    stickyCart.style.display = 'flex';
-                } else {
-                    stickyCart.style.display = 'none'; 
-                }
-            });
+            // Scroll event listener
+            window.addEventListener('scroll', handleScroll);
+            
+            // İlk yükleme kontrolü
+            handleScroll();
+            
+            // Resize event listener
+            window.addEventListener('resize', handleScroll);
+
+        }
+
+        // Scroll kontrolü
+        function handleScroll() {
+            const isMobile = window.innerWidth < 768;
+            const bodyHasOverflowHidden = document.body.style.overflow === 'hidden';
+            
+            if (window.scrollY > 300 && !bodyHasOverflowHidden && isMobile) {
+                stickyCart.classList.add('show');
+            } else {
+                stickyCart.classList.remove('show');
+            }
         }
     });
 </script>

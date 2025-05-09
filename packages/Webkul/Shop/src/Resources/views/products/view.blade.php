@@ -47,7 +47,9 @@
 @endPush
 
 
-@include('shop::home.header-ticker', []) 
+@include('shop::home.header-ticker', [])   
+
+@include('shop::products.view.sticky-bottom-cart', [])  
 <!-- Page Layout -->
 <x-shop::layouts>
     <!-- Page Title -->
