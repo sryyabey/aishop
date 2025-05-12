@@ -50,10 +50,8 @@
 <div class="ticker-container">
     <div class="ticker-wrapper">
         <p class="horizontal-ticker__item">❤️ %100 İade Garantisi ❤️</p>
-        <p class="horizontal-ticker__item">💰 Kapıda Ödeme Seçeneği 💰</p>
         <p class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</p>
         <p class="horizontal-ticker__item">❤️ %100 İade Garantisi ❤️</p>
-        <p class="horizontal-ticker__item">💰 Kapıda Ödeme Seçeneği 💰</p>
-        <p class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</p>
+        <p class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</p> 
     </div>
 </div>
