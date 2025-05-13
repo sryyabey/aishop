@@ -664,7 +664,7 @@ return [
             ],
 
             'configurable' => [
-                'as-low-as' => 'Şunun kadar düşük',
+                'as-low-as' => "%40 İndirim'den sonra",
             ],
         ],
 
