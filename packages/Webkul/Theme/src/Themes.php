@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
 use Webkul\Theme\Exceptions\ViterNotFound;
 
+use Illuminate\Support\Facades\Log;
 class Themes
 {
     /**
@@ -276,7 +277,16 @@ class Themes
          * detect the theme and provide Vite assets based on the current theme.
          */
         if (empty($namespace)) {
-            return $this->current()->setBagistoVite($entryPoints);
+            $currentTheme = $this->current();
+        
+            if ($currentTheme) {
+                return $currentTheme->setBagistoVite($entryPoints);
+            }
+        
+            // Tema yoksa hata logla veya varsayılan döndür
+            Log::warning('Bagisto Theme hatası: current() null döndü.');
+        
+            return;
         }
 
         /**

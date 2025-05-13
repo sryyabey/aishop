@@ -275,6 +275,8 @@ class PaymentController
     }
     public function paytr_payment_call(Request $request)
     {
+        // echo "OK";
+        // exit; 
         try{
         // Gelen tüm POST verisini yakalama
             $post1 = $request->all();

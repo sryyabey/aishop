@@ -97,36 +97,17 @@ src="https://www.facebook.com/tr?id=1776541496259759&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code --> 
 
-
-<!-- Meta Pixel Code -->
-<!--<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1201547918230082');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1201547918230082&ev=PageView&noscript=1"
-/></noscript>-->
-<!-- End Meta Pixel Code --> 
-
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NYR1PJB32"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7NYR1PJB32');
+    (function (c, s, q, u, a, r, e) {
+        c.hj=c.hj||function(){(c.hj.q=c.hj.q||[]).push(arguments)};
+        c._hjSettings = { hjid: a };
+        r = s.getElementsByTagName('head')[0];
+        e = s.createElement('script');
+        e.async = true;
+        e.src = q + c._hjSettings.hjid + u;
+        r.appendChild(e);
+    })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js', 6398447);
 </script>
-
     </head>
 
     <body>
@@ -165,9 +146,9 @@ src="https://www.facebook.com/tr?id=1201547918230082&ev=PageView&noscript=1"
 }
 </style>
         <!-- Footer bileşenine ekleyin -->
-<a href="https://wa.me/+905398147260" 
+<a href="https://wa.me/+905398147260?text=Merhaba,%20trendyx%20sitesinden%20ulaşıyorum.Ürününüzle%20ilgili%20bilgi%20almak%20istiyorum." 
    target="_blank" 
-   rel="noopener noreferrer" 
+   rel="noopener noreferrer"  
    class="whatsapp-float" 
    title="WhatsApp'tan Mesaj Gönder">
     <svg xmlns="http://www.w3.org/2000/svg" 
@@ -250,4 +231,13 @@ src="https://www.facebook.com/tr?id=1201547918230082&ev=PageView&noscript=1"
             {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
         </script>
     </body>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NYR1PJB32"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7NYR1PJB32'); 
+</script>
 </html>
