@@ -26,7 +26,7 @@
     .ks-section-title {
         font-size: 32px;
         font-weight: bold;
-        color: #8B4513;
+        color: #1e8f44;
         margin-bottom: 20px;
     }
     

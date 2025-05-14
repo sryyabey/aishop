@@ -178,7 +178,28 @@
 body[style*="overflow: hidden"] .sticky-cart-animate {
     display: none !important;
 }
-
+.secondary-button {
+    background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+    color: #fff!important;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 14px 28px;
+    border-radius: 16px;
+    border: 2px solid #FF8E53;
+    box-shadow: 0 6px 24px 0 rgba(255,107,107,0.25), 0 1.5px 6px 0 rgba(255,142,83,0.15);
+    letter-spacing: 0.5px;
+    transition: 
+        background 0.3s,
+        box-shadow 0.3s,
+        transform 0.2s,
+        border 0.3s;
+}
+.secondary-button:hover, .secondary-button:focus {
+    background: linear-gradient(90deg, #ff8e53 0%, #ff6b6b 100%);
+    box-shadow: 0 10px 32px 0 rgba(255,107,107,0.35), 0 2px 8px 0 rgba(255,142,83,0.18);
+    border: 2.5px solid #ff8e53;
+    transform: scale(1.04);
+}
 </style>
 
 <div class="sticky-cart-animate block md:hidden" v-scope>
@@ -206,7 +227,18 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" name="is_buy_now" :value="0">
-
+                <!--<div class="color-radio-group" style="margin-bottom: 10px;">
+        @foreach($product->super_attributes as $attribute)
+            @if($attribute->id == 31)
+                @foreach($attribute->options as $option)
+                    <label style="margin-right: 8px;">
+                        <input type="radio" name="super_attribute[31]" value="{{ $option->id }}">
+                        {{ $option->label }}
+                    </label>
+                @endforeach
+            @endif
+        @endforeach
+    </div>-->
                 <button 
                     type="submit"
                     class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
@@ -261,33 +293,23 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
         
         if (stickyCart) {
             stickyCart.classList.remove('show');
-             // Mobil kontrolü
             const isMobile = window.innerWidth < 768;
-        
-            
             if (!isMobile) {
                 stickyCart.style.display = 'none';
                 return;
             }
-            
             let isAddingToCart = false;
-            
-            // Add click event to form submit
             const form = stickyCart.querySelector('form');
             if (form) {
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
                     if (isAddingToCart) return;
                     isAddingToCart = true;
-                    
                     const button = form.querySelector('button');
                     const loadingSpin = form.querySelector('.loading-spin');
-                    
                     if (loadingSpin) loadingSpin.style.display = 'inline-block';
                     if (button) button.disabled = true;
-                    
-                    // Create form data and submit
+                    // FormData oluştur
                     const formData = new FormData(form);
                     fbq('track', 'AddToCart');
                     fetch(form.action, {
@@ -299,15 +321,32 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        // Update mini cart (trigger event)
-                        if (typeof app !== 'undefined') {
-                            app.config.globalProperties.$emitter.emit('update-mini-cart', data.data);
-                            app.config.globalProperties.$emitter.emit('add-flash', { 
-                                type: 'success', 
-                                message: data.message || 'Product added to cart' 
-                            });
+                        // Eksik bilgi hatası kontrolü
+
+                        console.log('Ana sepete kaydır111');
+                        console.log(data);
+                        if(data.message && data.message.includes('eksik')) {
+                            // Ana sepete kaydır
+                            // console.log('Ana sepete kaydır');
+                            const mainCart = document.querySelector('input[name="super_attribute[31]"]');
+                            if(mainCart) {
+                                mainCart.scrollIntoView({behavior: 'smooth', block: 'center'});
+                                const colorInput = document.querySelector('input[name="super_attribute[31]"]');
+                                if (colorInput) {
+                                    showColorWarning(colorInput);
+                                }
+                            } else {
+                                alert('Ana sepet bölümü bulunamadı. Lütfen id veya name değerini kontrol edin.');
+                            }
+                        } else {
+                            if (typeof app !== 'undefined') {
+                                app.config.globalProperties.$emitter.emit('update-mini-cart', data.data);
+                                app.config.globalProperties.$emitter.emit('add-flash', { 
+                                    type: 'success', 
+                                    message: data.message || 'Product added to cart' 
+                                });
+                            }
                         }
-                        
                         isAddingToCart = false;
                         if (loadingSpin) loadingSpin.style.display = 'none';
                         if (button) button.disabled = false;
@@ -317,7 +356,6 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                         isAddingToCart = false;
                         if (loadingSpin) loadingSpin.style.display = 'none';
                         if (button) button.disabled = false;
-                        
                         if (typeof app !== 'undefined') {
                             app.config.globalProperties.$emitter.emit('add-flash', { 
                                 type: 'error', 
@@ -325,9 +363,68 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                             });
                         }
                     });
+                    // ... existing code ...
+                    function showColorWarning(targetInput) {
+                        // Önce eski uyarı varsa kaldır
+                        const oldWarn = document.getElementById('color-warning-message');
+                        if (oldWarn) oldWarn.remove();
+
+                        // Uyarı elemanını oluştur
+                        const warn = document.createElement('div');
+                        warn.id = 'color-warning-message';
+                        warn.innerText = 'Lütfen renk seçimi yapınız!';
+                        warn.style.position = 'absolute';
+                        warn.style.left = '0';
+                        warn.style.right = '0';
+                        warn.style.margin = '0 auto';
+                        warn.style.width = '240px';
+                        warn.style.top = '120%';
+                        warn.style.background = 'linear-gradient(90deg, #ff3b3b 70%, #ff8e53 100%)';
+                        warn.style.color = 'white';
+                        warn.style.padding = '10px 20px';
+                        warn.style.borderRadius = '12px';
+                        warn.style.fontSize = '16px';
+                        warn.style.fontWeight = 'bold';
+                        warn.style.textAlign = 'center';
+                        warn.style.zIndex = '9999';
+                        warn.style.boxShadow = '0 4px 16px 0 rgba(255,59,59,0.25), 0 0 0 4px #fff3';
+                        warn.style.border = '2px solid #fff';
+                        warn.style.transition = 'opacity 0.3s, transform 0.3s';
+                        warn.style.transform = 'scale(1.08)';
+                        warn.style.letterSpacing = '0.5px';
+
+                        // Sağ tarafa büyük ve belirgin ok ekle
+                        const arrow = document.createElement('span');
+                        arrow.style.position = 'absolute';
+                        arrow.style.right = '-28px';
+                        arrow.style.top = '50%';
+                        arrow.style.transform = 'translateY(-50%)';
+                        arrow.style.width = '0';
+                        arrow.style.height = '0';
+                        arrow.style.borderTop = '16px solid transparent';
+                        arrow.style.borderBottom = '16px solid transparent';
+                        arrow.style.borderLeft = '22px solid #ff3b3b';
+                        arrow.style.filter = 'drop-shadow(0 2px 4px #ff8e53)';
+                        warn.appendChild(arrow);
+
+                        // Parent label veya doğrudan input'un parent'ı
+                        let parent = targetInput.closest('label') || targetInput.parentElement;
+                        parent.style.position = 'relative';
+                        parent.appendChild(warn);
+
+                        // input'a scroll yap
+                        targetInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+
+                        // 2 saniye sonra kaldır
+                        setTimeout(() => {
+                            warn.style.opacity = '0';
+                            warn.style.transform = 'scale(0.95)';
+                            setTimeout(() => warn.remove(), 300);
+                        }, 2000);
+                    }
+// ... existing code ...
                 });
             }
-
             // Scroll event listener
             window.addEventListener('scroll', handleScroll);
             
@@ -339,16 +436,24 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
 
         }
 
-        // Scroll kontrolü
+       // ... existing code ...
         function handleScroll() {
             const isMobile = window.innerWidth < 768;
             const bodyHasOverflowHidden = document.body.style.overflow === 'hidden';
-            
-            if (window.scrollY > 300 && !bodyHasOverflowHidden && isMobile) {
+            const mainAddToCartBtn = document.querySelector('#main #add-to-cart-btn');
+            if (window.scrollY > 700 && !bodyHasOverflowHidden && isMobile) {
                 stickyCart.classList.add('show');
+                // Ana formdaki sepete ekle butonunu gizle
+                if (mainAddToCartBtn) mainAddToCartBtn.style.display = 'none';
             } else {
                 stickyCart.classList.remove('show');
+                // Ana formdaki sepete ekle butonunu göster
+                if (mainAddToCartBtn) mainAddToCartBtn.style.display = '';
             }
         }
+        // ... existing code ...
+        
     });
+
+    
 </script>

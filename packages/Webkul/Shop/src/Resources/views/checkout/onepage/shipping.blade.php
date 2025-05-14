@@ -99,7 +99,27 @@
             },
 
             emits: ['processing', 'processed'],
-
+            mounted() {
+                // Otomatik ilk shipping method'u seç
+                if (this.methods) {
+                    for (const methodKey in this.methods) {
+                        const method = this.methods[methodKey];
+                        if (method && method.rates && method.rates.length > 0) {
+                            const firstRate = method.rates[0];
+                            this.$nextTick(() => {
+                                setTimeout(() => {
+                                    const input = document.getElementById(firstRate.method);
+                                    if (input && !input.checked) {
+                                        input.checked = true;
+                                        this.store(firstRate.method);
+                                    }
+                                }, 1500); // 1.5 saniye bekler, istersen artırabilirsin
+                            });
+                            break;
+                        }
+                    }
+                }
+            },
             methods: {
                 store(selectedMethod) {
                     this.$emit('processing', 'payment');
@@ -125,4 +145,19 @@
             },
         });
     </script>
+    <style>
+        label[for^="free_"] {
+    background: linear-gradient(90deg, #fff3e0 0%, #ffe0b2 100%);
+    border: 2.5px solid #ff9800 !important;
+    box-shadow: 0 4px 18px 0 rgba(255,152,0,0.10);
+    color: #bf360c;
+    font-weight: bold;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+label[for^="free_"]:hover, label[for^="free_"]:focus {
+    box-shadow: 0 8px 32px 0 rgba(255,152,0,0.18);
+    border-color: #ff6f00 !important;
+    background: linear-gradient(90deg, #ffe0b2 0%, #fff3e0 100%);
+}
+    </style>
 @endPushOnce

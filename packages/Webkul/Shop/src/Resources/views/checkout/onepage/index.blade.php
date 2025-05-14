@@ -183,6 +183,14 @@
                         if (step == 'review') {
                             this.canPlaceOrder = true;
 
+                            // Sipariş ver butonu açıldığında otomatik scroll
+                            // this.$nextTick(() => {
+                            //     window.scrollTo({
+                            //         top: document.body.scrollHeight,
+                            //         behavior: 'smooth'
+                            //     });
+                            // });
+
                             return;
                         }
 
@@ -240,5 +248,31 @@
                 },
             });
         </script>
+        <style>
+   .primary-button.w-max {
+    background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%) !important;
+    color: #fff !important;
+    border: 2.5px solid #2563eb !important;
+    font-size: 1.25rem;
+    font-weight: bold;
+    box-shadow: 0 6px 24px 0 rgba(30,58,138,0.18);
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+    margin-bottom: 40px;
+}
+.primary-button.w-max:hover,
+.primary-button.w-max:focus {
+    background: linear-gradient(90deg, #2563eb 0%, #1e3a8a 100%) !important;
+    border-color: #1e40af !important;
+    box-shadow: 0 12px 32px 0 rgba(30,58,138,0.22);
+    color: #fff !important;
+}
+@media (max-width: 768px) {
+    .primary-button.w-max {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 60px;
+    }
+}
+        </style>
     @endPushOnce
 </x-shop::layouts>

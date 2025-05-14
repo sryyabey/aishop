@@ -11,7 +11,7 @@
 .ticker-container {
     width: 100%;
     max-width: 100%;
-    background: #8B4513;
+    background: #1e8f44;
     overflow: hidden;
     padding: 10px 0;
     position: relative;
