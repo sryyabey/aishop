@@ -311,7 +311,6 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                     if (button) button.disabled = true;
                     // FormData oluştur
                     const formData = new FormData(form);
-                    fbq('track', 'AddToCart');
                     fetch(form.action, {
                         method: 'POST',
                         body: formData,
@@ -339,6 +338,8 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                                 alert('Ana sepet bölümü bulunamadı. Lütfen id veya name değerini kontrol edin.');
                             }
                         } else {
+
+                            fbq('track', 'AddToCart');
                             if (typeof app !== 'undefined') {
                                 app.config.globalProperties.$emitter.emit('update-mini-cart', data.data);
                                 app.config.globalProperties.$emitter.emit('add-flash', { 

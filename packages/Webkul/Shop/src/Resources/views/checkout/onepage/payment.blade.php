@@ -154,5 +154,53 @@
             },
         });
     </script>
-    
+    <style>
+        .payment-methods-area,
+.flex.flex-wrap.gap-7,
+.flex.flex-wrap.max-md\:gap-4.max-sm\:gap-2\.5 {
+    background: linear-gradient(90deg, #fbeee6 0%, #ffe0b2 100%);
+    border: 2.5px solid #ff9800;
+    border-radius: 18px;
+    padding: 24px 12px;
+    box-shadow: 0 2px 12px 0 rgba(255,183,77,0.10);
+    margin-bottom: 18px;
+}
+.payment-methods-area label.block,
+.flex.flex-wrap.gap-7 label.block,
+.flex.flex-wrap.max-md\:gap-4.max-sm\:gap-2\.5 label.block {
+    background: #fffbe7;
+    border: 2px solid #ffb74d !important;
+    box-shadow: 0 2px 8px 0 rgba(255,183,77,0.08);
+    font-weight: bold;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+.payment-methods-area label.block:hover,
+.payment-methods-area label.block:focus,
+.flex.flex-wrap.gap-7 label.block:hover,
+.flex.flex-wrap.gap-7 label.block:focus,
+.flex.flex-wrap.max-md\:gap-4.max-sm\:gap-2\.5 label.block:hover,
+.flex.flex-wrap.max-md\:gap-4.max-sm\:gap-2\.5 label.block:focus {
+    border-color: #ff6f00 !important;
+    box-shadow: 0 8px 32px 0 rgba(255,152,0,0.18);
+    background: #fff3e0;
+}
+/* Uyarı popup'ı */
+.payment-warning-popup {
+    position: relative;
+    margin-bottom: 16px;
+    background: linear-gradient(90deg, #ffb74d 60%, #ff6b6b 100%);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 24px 0 rgba(255,107,107,0.12);
+    animation: popup-fadein 0.4s;
+}
+@keyframes popup-fadein {
+    from { opacity: 0; transform: translateY(-20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+    </style> 
 @endPushOnce

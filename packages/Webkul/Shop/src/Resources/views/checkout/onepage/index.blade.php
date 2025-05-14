@@ -270,9 +270,9 @@
     .primary-button.w-max {
         width: 100% !important;
         max-width: 100% !important;
-        margin-bottom: 60px;
+        margin-bottom: 200px;
     }
 }
-        </style>
+        </style> 
     @endPushOnce
 </x-shop::layouts>
