@@ -276,9 +276,13 @@ class PaymentController
     public function paytr_payment_call(Request $request)
     {
         // echo "OK";
-        // exit; 
-        try{
-        // Gelen tüm POST verisini yakalama
+        // exit;  
+
+        // $post1 = $request->all();  
+        // $post = json_decode(json_encode($post1), true);
+        // Log::info('PAYTR POST başlangıç Data:',$post);      
+        try{ 
+        // Gelen tüm POST verisini yakalama 
             $post1 = $request->all();
             $post = json_decode(json_encode($post1), true);
             Log::info('PAYTR POST Data:', $post1);  
@@ -354,15 +358,25 @@ class PaymentController
                 //         'pending-payment' => 'Ödeme Bekliyor',
                 //         'processing'      => 'İşleniyor',
 
-                // $order = $this->orderRepository->create(data: $orderData);
                 $existingOrder = Order::where('cart_id',$cart->id)->first();
-                $existingOrder->status = 'canceled';
-                $existingOrder->failed_reason_code = $post['failed_reason_code'] ?? null;
-                $existingOrder->failed_reason_msg = $post['failed_reason_msg'] ?? null;
-                $existingOrder->save(); 
+                if( $existingOrder ){
+                    $existingOrder = Order::where('cart_id',$cart->id)->first();
+                    $existingOrder->status = 'canceled';
+                    $existingOrder->failed_reason_code = $post['failed_reason_code'] ?? null;
+                    $existingOrder->failed_reason_msg = $post['failed_reason_msg'] ?? null;
+                    $existingOrder->save(); 
+                }else{
+                    $order = $this->orderRepository->create(data: $orderData);
+                    $order->status = 'canceled';  
+                    $order->failed_reason_code = $post['failed_reason_code'];
+                    $order->failed_reason_msg = $post['failed_reason_msg'];
+                    $order->save();  
+                    Log::info('new Order :', $order);
+                }
         
                 session()->flash('error', trans('shop::app.checkout.payment-failed'));
-                Log::info('Order :', $existingOrder);
+               
+                Log::info('existingOrder Order :', $existingOrder);
                 echo "OK";
                 exit;
                 // return redirect()->route('shop.checkout.onepage.index'); 
@@ -385,7 +399,7 @@ class PaymentController
 
         session()->flash('success', 'Siparişiniz Başarılı Bir Şekide Alındı !');
 
-        return redirect()->route('shop.checkout.onepage.index');
+        return redirect()->route('shop.checkout.onepage.index'); 
         // return redirect()->route('shop.customers.account.orders.index');
     }
 
@@ -399,21 +413,26 @@ class PaymentController
             return redirect()->route('shop.checkout.onepage.index');
         }
 
-        // $orderData = (new OrderResource($cart))->jsonSerialize();
+        $orderData = (new OrderResource($cart))->jsonSerialize();
         $existingOrder = Order::where('cart_id', $cart->id)->first();
         if ($existingOrder) {
             $existingOrder->status = 'canceled';
             $existingOrder->failed_reason_code = 'payment_failed';
             $existingOrder->failed_reason_msg = 'Ödeme başarısız oldu.';
-            $existingOrder->save(); 
+            $existingOrder->save();  
+            Log::info('PAYTR POST Data:', ['cart' => $cart, 'order' => $existingOrder,"status" => 'canceled',"failed_reason_code" => 'payment_failed', 'failed_reason_msg' => 'Ödeme başarısız oldu.']);
+       
+        }else{
+            $order = $this->orderRepository->create($orderData);
+            // $existingOrder = Order::where('cart_id',$cart->id)->first();
+            $order->status = 'canceled'; 
+            $order->failed_reason_code = $post['failed_reason_code'];
+            $order->failed_reason_msg = $post['failed_reason_msg'];
+            $order->save();  
+            Log::info('PAYTR POST Data:', ['cart' => $cart, 'order' => $order,"status" => 'canceled',"failed_reason_code" => 'payment_failed', 'failed_reason_msg' => 'Ödeme başarısız oldu.']);
+       
         }
-        Log::info('PAYTR POST Data:', ['cart' => $cart, 'order' => $existingOrder,"status" => 'canceled',"failed_reason_code" => 'payment_failed', 'failed_reason_msg' => 'Ödeme başarısız oldu.']);
-        // $order = $this->orderRepository->create($orderData);
-        // $existingOrder = Order::where('cart_id',$cart->id)->first();
-        // $order->status = 'canceled'; 
-        // $order->failed_reason_code = $post['failed_reason_code'];
-        // $order->failed_reason_msg = $post['failed_reason_msg'];
-        // $order->save(); 
+       
 
         session()->flash('error', trans('shop::app.checkout.payment-failed'));
         return redirect()->route('shop.checkout.onepage.index');

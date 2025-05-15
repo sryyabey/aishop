@@ -182,7 +182,7 @@ class OnepageController extends APIController
 
         return new JsonResource([
             'redirect'     => true,
-            'redirect_url' => route('shop.checkout.onepage.success'),
+            'redirect_url' => route('shop.checkout.onepage.success'), 
         ]);
     }
 
