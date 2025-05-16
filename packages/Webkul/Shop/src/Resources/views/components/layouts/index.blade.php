@@ -146,9 +146,9 @@ src="https://www.facebook.com/tr?id=1776541496259759&ev=PageView&noscript=1"
 }
 </style>
         <!-- Footer bileşenine ekleyin -->
-<a href="https://wa.me/+905398147260?text=Merhaba,%20trendyx%20sitesinden%20ulaşıyorum.Ürününüzle%20ilgili%20bilgi%20almak%20istiyorum." 
-   target="_blank" 
-   rel="noopener noreferrer"  
+<a href="https://wa.me/+905061873910?text=Merhaba,%20trendyx%20sitesinden%20ulaşıyorum.Ürününüzle%20ilgili%20bilgi%20almak%20istiyorum." 
+   target="_blank"  
+   rel="noopener noreferrer"    
    class="whatsapp-float" 
    title="WhatsApp'tan Mesaj Gönder">
     <svg xmlns="http://www.w3.org/2000/svg" 

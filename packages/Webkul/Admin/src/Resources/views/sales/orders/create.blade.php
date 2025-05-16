@@ -202,8 +202,7 @@
                         this.addToCart(params);
                     },
 
-                    addToCart(params) {
-                        fbq('track', 'AddToCart');
+                    addToCart(params) { 
                         let formData = {};
 
                         if (params.additional?.attributes) {

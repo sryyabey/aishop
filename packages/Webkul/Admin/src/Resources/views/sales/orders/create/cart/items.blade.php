@@ -434,7 +434,6 @@
                 },
 
                 addToCart(params) {
-                    fbq('track', 'AddToCart');
                     this.$emit('add-to-cart', {
                         product: this.searchedProducts.find(product => product.id == params.product_id),
                         qty: params.qty
@@ -448,7 +447,7 @@
                         agree: () => {
                             this.$axios.delete("{{ route('admin.sales.cart.items.destroy', $cart->id) }}", {
                                 data: {
-                                    cart_item_id: item.id
+                                    cart_item_id: item.id 
                                 }
                             })
                                 .then(response => {

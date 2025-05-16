@@ -15,7 +15,7 @@
 @pushOnce('scripts')
 <script>
 
-fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+
     </script>
     <script
         type="text/x-template"
@@ -574,8 +574,8 @@ fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', payload)
                         .then((response) => {
                             this.isStoring = false;
-
-                            if (response.data.data.redirect_url) {
+                            fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+                            if (response.data.data.redirect_url) { 
                                 window.location.href = response.data.data.redirect_url;
                             } else {
                                 if (this.cart.have_stockable_items) {
