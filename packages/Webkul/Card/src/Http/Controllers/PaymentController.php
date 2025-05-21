@@ -364,11 +364,11 @@ class PaymentController
                     $existingOrder->status = 'canceled'; 
                     // $existingOrder->failed_reason_code = $post['failed_reason_code'] ?? null;
                     // $existingOrder->failed_reason_msg = $post['failed_reason_msg'] ?? null;
-                    $existingOrder->save(); 
+                    $existingOrder->save();  
                 }else{
                     $order = $this->orderRepository->create(data: $orderData);
                     $order->status = 'canceled';  
-                    // $order->failed_reason_code = $post['failed_reason_code'];
+                    // $order->failed_reason_code = $post['failed_reason_code']; 
                     // $order->failed_reason_msg = $post['failed_reason_msg'];
                     $order->save();  
                     Log::info('new Order :', $order);
