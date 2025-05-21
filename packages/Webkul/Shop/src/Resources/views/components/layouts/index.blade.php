@@ -17,7 +17,7 @@
         <title>{{ $title ?? '' }}</title>
 
         <meta charset="UTF-8">
-        <meta name="facebook-domain-verification" content="i1cdpos7ckadbyz53tgao4wnrwcvoa" />
+        <meta name="facebook-domain-verification" content="h9h6b20e8a3wwaodcptj0784oa6wx2" />
         <meta
             http-equiv="X-UA-Compatible"
             content="IE=edge"
