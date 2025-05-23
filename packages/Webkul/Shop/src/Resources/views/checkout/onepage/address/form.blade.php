@@ -428,7 +428,7 @@
                             type: 'info', 
                             message: 'Adres alanındaki özel karakterler kaldırıldı.'
                         });
-                    }
+                    } 
                 },
                 // Ekleme yapıldığında temizliği kontrol et
                 handleAddressInput(event) {
