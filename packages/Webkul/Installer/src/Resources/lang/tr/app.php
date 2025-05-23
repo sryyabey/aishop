@@ -319,7 +319,7 @@ return [
 
                 'offer-information' => [
                     'content' => [
-                        'title' => 'İlk siparişinizde %5\'e kadar İNDİRİM alın HEMEN ALIŞVERİŞ YAPIN',
+                        'title' => "2 ürün alana Sepette %5'e varan İNDİRİM",
                     ],
 
                     'name' => 'Teklif Bilgisi', 

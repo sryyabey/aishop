@@ -2471,11 +2471,11 @@ return [
                 'title'   => 'admin::app.configuration.index.sales.checkout.mini-cart.display-mini-cart',
                 'type'    => 'boolean',
                 'default' => 1,
-            ], [
+            ], [ 
                 'name'       => 'offer_info',
                 'title'      => 'admin::app.configuration.index.sales.checkout.mini-cart.mini-cart-offer-info',
                 'type'       => 'text',
-                'default'    => "İlk siparişinizde %5'e varan İNDİRİM kazanın",
+                'default'    => "2 ürün alana Sepette %5'e varan İNDİRİM",
                 'validation' => 'max:200',
             ],
         ],

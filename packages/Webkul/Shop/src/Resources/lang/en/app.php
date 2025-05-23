@@ -944,7 +944,7 @@ return [
                 'continue-to-checkout' => 'Continue to Checkout',
                 'empty-cart'           => 'Your cart is empty',
                 'excl-tax'             => 'Excl. Tax:',
-                'offer-on-orders'      => "İlk siparişinizde %5'e varan İNDİRİM kazanın",
+                'offer-on-orders'      => "2 ürün alana Sepette %5'e varan İNDİRİM",
                 'remove'               => 'Remove',
                 'see-details'          => 'See Details',
                 'shopping-cart'        => 'Shopping Cart',
