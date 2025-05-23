@@ -1,22 +1,18 @@
 <div class="ticker-container" id="tickerContainer" style="display: none;">
     <div class="ticker-wrapper">
 
-        <span class="horizontal-ticker__item">📦 1000₺ ve Üzeri Alışverişlerde Kargo Ücretsiz! 📦</span>
         <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
         <span class="horizontal-ticker__item">🚚 Kapıda Ödeme 🚚</span>
         <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ❤️</span>
 
-        <span class="horizontal-ticker__item">📦 1000₺ ve Üzeri Alışverişlerde Kargo Ücretsiz! 📦</span>
         <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
         <span class="horizontal-ticker__item">🚚 Kapıda Ödeme 🚚</span>
         <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ❤️</span>
 
-        <span class="horizontal-ticker__item">📦 1000₺ ve Üzeri Alışverişlerde Kargo Ücretsiz! 📦</span>
         <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
         <span class="horizontal-ticker__item">🚚 Kapıda Ödeme 🚚</span>
         <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ❤️</span>
 
-        <span class="horizontal-ticker__item">📦 1000₺ ve Üzeri Alışverişlerde Kargo Ücretsiz! 📦</span>
         <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
         <span class="horizontal-ticker__item">🚚 Kapıda Ödeme 🚚</span>
         <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ❤️</span>   

@@ -103,6 +103,10 @@
                     rules="required|address"
                     :label="trans('shop::app.checkout.onepage.address.street-address')"
                     :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
+                    @input="cleanStreetAddress"
+                    @keypress="handleAddressInput"
+                    @paste="handleAddressPaste"
+                    autocomplete="off"
                 />
 
                 <x-shop::form.control-group.error
@@ -145,6 +149,7 @@
                         rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.country')"
                         :placeholder="trans('shop::app.checkout.onepage.address.country')"
+                        default-value="TR"
                     >
                         <option value="">
                             @lang('shop::app.checkout.onepage.address.select-country')
@@ -265,6 +270,12 @@
                     rules="required|numeric"
                     :label="trans('shop::app.checkout.onepage.address.telephone')"
                     :placeholder="trans('shop::app.checkout.onepage.address.telephone')"
+                    @input="cleanPhoneNumber"
+                    @keypress="preventNonNumeric"
+                    @paste="handlePaste"
+                    maxlength="11"
+                    autocomplete="off"
+                    inputmode="numeric"
                 />
 
                 <x-shop::form.control-group.error ::name="controlName + '.phone'" />
@@ -330,6 +341,10 @@
                     this.$axios.get("{{ route('shop.api.core.countries') }}")
                         .then(response => {
                             this.countries = response.data.data;
+
+                             // Varsayılan olarak Türkiye'yi seç
+                            this.selectedCountry = 'TR';
+                            this.address.country = 'TR';
                         })
                         .catch(() => {});
                 },
@@ -341,6 +356,102 @@
                         })
                         .catch(() => {});
                 },
+                cleanPhoneNumber(event) {
+                    // Sadece rakamları tut
+                    let cleaned = event.target.value.replace(/[^0-9]/g, '');
+                    
+                    // Maksimum 11 karakter kontrolü
+                    if (cleaned.length > 11) {
+                        cleaned = cleaned.slice(0, 11);
+                    }
+                    
+                    // Input ve v-model değerlerini güncelle
+                    event.target.value = cleaned;
+                    this.address.phone = cleaned;
+                },
+
+                preventNonNumeric(event) {
+                    // Sayısal olmayan tuşları engelle
+                    let keyCode = event.keyCode ? event.keyCode : event.which;
+                    
+                    // Sayısal tuşlar (0-9) ve kontrol tuşları (backspace, delete vb.)
+                    if ((keyCode < 48 || keyCode > 57) && // 0-9 arası
+                        keyCode !== 8 &&  // backspace
+                        keyCode !== 46 && // delete
+                        keyCode !== 37 && // sol ok
+                        keyCode !== 39) { // sağ ok
+                        event.preventDefault();
+                    }
+                    
+                    // Maksimum karakter kontrolü
+                    if (event.target.value.length >= 11 && 
+                        keyCode !== 8 && 
+                        keyCode !== 46 && 
+                        keyCode !== 37 && 
+                        keyCode !== 39) {
+                        event.preventDefault(); 
+                    }
+                },
+
+                handlePaste(event) { 
+                    // Yapıştırma işlemini engelle
+                    event.preventDefault();
+                    
+                    // Alternatif olarak sadece rakamları yapıştırmak için:
+                    // const pastedText = (event.clipboardData || window.clipboardData).getData('text');
+                    // const numericOnly = pastedText.replace(/[^0-9]/g, '').slice(0, 11);
+                    // this.address.phone = numericOnly;
+                } ,
+                cleanStreetAddress(event) {
+                    // Orijinal değeri al
+                    let value = event.target.value;
+                    
+                     // Özel karakterleri kontrol et (^ eklendi)
+                    const hasSpecialChars = /[!@#$%^&*()_+=\[\]{};:'"\\|,<>?~`^]/.test(value);
+        
+                    // Temizleme işlemi
+                    let cleaned = value
+                        // Özel karakterleri boşluk ile değiştir
+                        .replace(/[!@#$%^&*()_+=\[\]{};:'"\\|,<>?~`^]/g, '')
+                        // Birden fazla boşluğu tek boşluğa çevir
+                        .replace(/\s+/g, ' ')
+                        // Baştaki ve sondaki boşlukları temizle
+                        .trim();
+                    
+                    // Input ve model değerlerini güncelle
+                    event.target.value = cleaned;
+                    this.address.address[0] = cleaned;
+                    
+                    // Sadece özel karakter temizlendiyse bildirim göster
+                    if (hasSpecialChars && typeof app !== 'undefined') {
+                        app.config.globalProperties.$emitter.emit('add-flash', { 
+                            type: 'info', 
+                            message: 'Adres alanındaki özel karakterler kaldırıldı.'
+                        });
+                    }
+                },
+                // Ekleme yapıldığında temizliği kontrol et
+                handleAddressInput(event) {
+                    const value = event.target.value;
+                    const lastChar = event.key;
+                    
+                    // Son karakterin özel karakter olup olmadığını kontrol et
+                
+                    // Özel karakterleri kontrol et
+                    const hasSpecialChars = /[!@#$%^&*()_+=\[\]{};:'"\\|,<>?~`^]/.test(lastChar);
+        
+                    if (hasSpecialChars) {
+                        // Özel karakteri engelle ve kullanıcıyı bilgilendir
+                        event.preventDefault();
+                        
+                        if (typeof app !== 'undefined') {
+                            app.config.globalProperties.$emitter.emit('add-flash', { 
+                                type: 'warning', 
+                                message: 'Özel karakterler adres alanında kullanılamaz.' 
+                            });
+                        }
+                    }
+                }
             }
         });
     </script>
