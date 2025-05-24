@@ -13,7 +13,7 @@
 
 @pushOnce('scripts')
 <script>
-    fbq('track', 'InitiateCheckout');//alışveriş başlatma
+    //fbq('track', 'InitiateCheckout');//alışveriş başlatma
     </script>
     <script
         type="text/x-template"
@@ -131,7 +131,7 @@
             methods: {
                 addAddress(params, { setErrors }) {
                     this.isStoring = true;
-
+                    fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
                     params['billing']['use_for_shipping'] = this.useBillingAddressForShipping;
 
                     this.moveToNextStep();

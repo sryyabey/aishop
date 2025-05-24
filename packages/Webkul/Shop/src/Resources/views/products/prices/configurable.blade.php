@@ -31,6 +31,6 @@
     </span>
 </div>
 
-<p class="price-label text-sm text-zinc-500 max-sm:text-xs mt-1">
-    2 ürün al sepette %5 ek indirim
-</p>
+<!--<p class="price-label text-sm text-zinc-500 max-sm:text-xs mt-1">
+    🎁 2 ürün al<br/>sepette %5<br/>indirim kazan ⭐
+</p>-->
