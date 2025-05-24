@@ -51,7 +51,7 @@
 
 @include('shop::products.view.sticky-bottom-cart', [])  
 <!-- Page Layout -->
-<x-shop::layouts>
+<x-shop::layouts> 
     <!-- Page Title -->
     <script>
     fbq('track', 'ViewContent'); //sayfa görüntüleme
@@ -814,7 +814,7 @@
 
                 methods: {
                     addToCart(params) {
-                        fbq('track', 'AddToCart'); //sepete ekleme
+                        //fbq('track', 'AddToCart'); //sepete ekleme
                         const operation = this.is_buy_now ? 'buyNow' : 'addToCart';
 
                         this.isStoring[operation] = true;
