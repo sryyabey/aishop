@@ -1,25 +1,21 @@
 <div class="ticker-container" id="tickerContainer" style="display: none;">
    <div class="ticker-wrapper">
     <!-- İlk grup -->
-    <span class="horizontal-ticker__item">🎁 2 ürün alana sepette %5 indirim ⭐</span>
     <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
     <span class="horizontal-ticker__item">💳 Kapıda Ödeme 🏠</span>
     <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ♻️</span>
 
     <!-- İkinci grup -->
-    <span class="horizontal-ticker__item">🎁 2 ürün alana sepette %5 indirim ⭐</span>
     <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
     <span class="horizontal-ticker__item">💳 Kapıda Ödeme 🏠</span>
     <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ♻️</span>
 
     <!-- Üçüncü grup -->
-    <span class="horizontal-ticker__item">🎁 2 ürün alana sepette %5 indirim ⭐</span>
     <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
     <span class="horizontal-ticker__item">💳 Kapıda Ödeme 🏠</span>
     <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ♻️</span>
 
     <!-- Dördüncü grup -->
-    <span class="horizontal-ticker__item">🎁 2 ürün alana sepette %5 indirim ⭐</span>
     <span class="horizontal-ticker__item">🚚 Ücretsiz Kargo 🚚</span>
     <span class="horizontal-ticker__item">💳 Kapıda Ödeme 🏠</span>
     <span class="horizontal-ticker__item">❤️ %100 İade Garantisi ♻️</span>
