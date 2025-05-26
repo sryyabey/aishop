@@ -50,9 +50,9 @@ class PaymentController
             // $merchant_key   = env('PAYTR_MERCHANT_KEY');
             // $merchant_salt  = env('PAYTR_MERCHANT_SALT');
 
-            $PAYTR_MERCHANT_ID="570396";
-            $PAYTR_MERCHANT_KEY="46JihJUD4NjYwxNu";
-            $PAYTR_MERCHANT_SALT="D7Na8UwqwrxuMnw6";
+            $PAYTR_MERCHANT_ID="578409";
+            $PAYTR_MERCHANT_KEY="kp4YqMzySwEMnmh1";
+            $PAYTR_MERCHANT_SALT="T4TcqNUu24Tf1Moi";  
             // Zorunlu alanlar - API Entegrasyon Bilgileri
             $merchant_id    = $PAYTR_MERCHANT_ID;
             $merchant_key   = $PAYTR_MERCHANT_KEY;
@@ -289,9 +289,9 @@ class PaymentController
             Log::info('PayTR Callback başladı', ['data' => $post]);
             Log::info('PayTR Callback merchant_oid ', ['merchant_oid' => $post['merchant_oid']]);
         
-            $PAYTR_MERCHANT_ID="570396"; 
-            $PAYTR_MERCHANT_KEY="46JihJUD4NjYwxNu";  
-            $PAYTR_MERCHANT_SALT="D7Na8UwqwrxuMnw6";
+            $PAYTR_MERCHANT_ID="578409"; 
+            $PAYTR_MERCHANT_KEY="kp4YqMzySwEMnmh1";  
+            $PAYTR_MERCHANT_SALT="T4TcqNUu24Tf1Moi";
             // Zorunlu alanlar - API Entegrasyon Bilgileri
             $merchant_id    = $PAYTR_MERCHANT_ID;
             $merchant_key   = $PAYTR_MERCHANT_KEY;
