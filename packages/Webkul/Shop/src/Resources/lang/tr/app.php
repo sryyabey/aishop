@@ -1077,7 +1077,7 @@ return [
         'index' => [
             'categories-carousel' => 'Kategoriler Karuseli',
             'image-carousel'      => 'Görüntü Karuseli',
-            'offer'               => "2 ürün alana Sepette %5'e varan İNDİRİM, ŞİMDİ ALIŞVERİŞ YAPIN",
+            'offer'               => "ŞİMDİ ALIŞVERİŞ YAPIN",
             'product-carousel'    => 'Ürün Karuseli',
             'resend-verify-email' => 'Doğrulama e-postasını yeniden gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',

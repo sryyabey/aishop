@@ -319,7 +319,7 @@ return [
 
                 'offer-information' => [
                     'content' => [
-                        'title' => "2 ürün alana Sepette %5'e varan İNDİRİM",
+                        'title' => "ŞİMDİ ALIŞVERİŞ YAPIN",
                     ],
 
                     'name' => 'Teklif Bilgisi', 

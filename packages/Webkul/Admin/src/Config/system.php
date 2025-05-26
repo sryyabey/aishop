@@ -2475,7 +2475,7 @@ return [
                 'name'       => 'offer_info',
                 'title'      => 'admin::app.configuration.index.sales.checkout.mini-cart.mini-cart-offer-info',
                 'type'       => 'text',
-                'default'    => "2 ürün alana Sepette %5'e varan İNDİRİM",
+                'default'    => "ŞİMDİ ALIŞVERİŞ YAPIN",
                 'validation' => 'max:200',
             ],
         ],
