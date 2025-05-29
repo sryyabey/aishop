@@ -72,7 +72,7 @@
 
             <!-- Email -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group.label class="!mt-0">
                     @lang('shop::app.checkout.onepage.address.email')
                 </x-shop::form.control-group.label>
 
@@ -80,7 +80,7 @@
                     type="email"
                     ::name="controlName + '.email'"
                     ::value="address.email"
-                    rules="required|email"
+                    rules="email"
                     :label="trans('shop::app.checkout.onepage.address.email')"
                     placeholder="email@example.com"
                 />
@@ -304,8 +304,8 @@
                         first_name: '',
                         last_name: '',
                         email: '',
-                        address: [],
-                        country: '',
+                        address: ['Mahalle/Sokak/Cadde, Apt No, Daire No'],
+                        country: '', 
                         state: '',
                         city: '',
                         postcode: '',
