@@ -85,17 +85,19 @@
                     >
                         <!-- Included Addresses Blade File -->
                         <template v-if="['address', 'shipping', 'payment', 'review'].includes(currentStep)">
+                            
                             @include('shop::checkout.onepage.address')
                         </template>
-
                         <!-- Included Shipping Methods Blade File -->
                         <template v-if="cart.have_stockable_items && ['shipping', 'payment', 'review'].includes(currentStep)">
+                        
                             @include('shop::checkout.onepage.shipping')
+                            @include('shop::checkout.onepage.payment') 
                         </template>
 
                         <!-- Included Payment Methods Blade File -->
                         <template v-if="['payment', 'review'].includes(currentStep)">
-                            @include('shop::checkout.onepage.payment')
+                           
                         </template>
                     </div>
 

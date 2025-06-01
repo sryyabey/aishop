@@ -101,24 +101,26 @@
             emits: ['processing', 'processed'],
             mounted() {
                 // Otomatik ilk shipping method'u seç
-                if (this.methods) {
-                    for (const methodKey in this.methods) {
-                        const method = this.methods[methodKey];
-                        if (method && method.rates && method.rates.length > 0) {
-                            const firstRate = method.rates[0];
-                            this.$nextTick(() => {
-                                setTimeout(() => {
-                                    const input = document.getElementById(firstRate.method);
-                                    if (input && !input.checked) {
-                                        input.checked = true;
-                                        this.store(firstRate.method);
-                                    }
-                                }, 1500); // 1.5 saniye bekler, istersen artırabilirsin
-                            });
-                            break;
+                this.$nextTick(() => {
+                    if (this.methods) {
+                        for (const methodKey in this.methods) {
+                            const method = this.methods[methodKey];
+                            if (method && method.rates && method.rates.length > 0) {
+                                // Ücretsiz kargo varsa onu seç
+                                const freeShipping = method.rates.find(rate => rate.method.startsWith('free_'));
+                                const selectedRate = freeShipping || method.rates[0];
+
+                                // Radio butonu seç ve store metodunu çağır
+                                const input = document.querySelector(`input[name="shipping_method"][value="${selectedRate.method}"]`);
+                                if (input && !input.checked) {
+                                    input.checked = true;
+                                    this.store(selectedRate.method);
+                                }
+                                break;
+                            }
                         }
                     }
-                }
+                });
             },
             methods: {
                 store(selectedMethod) {
