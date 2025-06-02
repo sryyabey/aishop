@@ -325,9 +325,9 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                         console.log('Ana sepete kaydır111');
                         console.log(data);
                         if(data.message && data.message.includes('eksik')) {
-                            // Ana sepete kaydır
-                            // console.log('Ana sepete kaydır');
-                            const mainCart = document.querySelector('input[name="super_attribute[31]"]');
+                             // Ana sepete scroll işlemi
+
+                            /*const mainCart = document.querySelector('input[name="super_attribute[31]"]');
                             if(mainCart) {
                                 mainCart.scrollIntoView({behavior: 'smooth', block: 'center'});
                                 const colorInput = document.querySelector('input[name="super_attribute[31]"]');
@@ -336,6 +336,42 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                                 }
                             } else {
                                 alert('Ana sepet bölümü bulunamadı. Lütfen id veya name değerini kontrol edin.');
+                            }*/
+
+                            const mainCart = document.querySelector('input[name="super_attribute[31]"]');
+                            const mainCartAlt = document.querySelector('.attributes');
+                            const mainCartContainer = document.querySelector('#product-form');
+
+                            if (mainCart) {
+                                mainCart.scrollIntoView({behavior: 'smooth', block: 'center'});
+                                const colorInput = document.querySelector('input[name="super_attribute[31]"]');
+                                if (colorInput) {
+                                    showColorWarning(colorInput);
+                                }
+                            } else if (mainCartAlt) {
+                                // Alternatif olarak .attributes sınıfına sahip elemana kaydır
+                                mainCartAlt.scrollIntoView({behavior: 'smooth', block: 'center'});
+                                app.config.globalProperties.$emitter.emit('add-flash', { 
+                                    type: 'warning', 
+                                    message: 'Lütfen ürün özelliklerini seçiniz'
+                                });
+                            } else if (mainCartContainer) {
+                                // En son çare olarak form containerına kaydır
+                                mainCartContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
+                                app.config.globalProperties.$emitter.emit('add-flash', { 
+                                    type: 'warning', 
+                                    message: 'Lütfen ürün seçeneklerini kontrol ediniz'
+                                });
+                            } else {
+                                // Hiçbir eleman bulunamazsa sayfayı yukarı kaydır
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: 'smooth'
+                                });
+                                app.config.globalProperties.$emitter.emit('add-flash', { 
+                                    type: 'warning', 
+                                    message: 'Lütfen üst bölümden sepete ekleme işlemini tamamlayınız'
+                                });
                             }
                         } else {
 
