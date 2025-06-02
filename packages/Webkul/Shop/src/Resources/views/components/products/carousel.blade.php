@@ -7,6 +7,31 @@
 </v-products-carousel>
 
 @pushOnce('scripts')
+<style>
+.scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Kaydırma çubuğunu gizle ama işlevselliğini koru */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Scroll snap özelliklerini ekle */
+.flex {
+    scroll-snap-type: x mandatory;
+}
+
+.flex > * {
+    scroll-snap-align: start;
+}
+</style>
     <script
         type="text/x-template"
         id="v-products-carousel-template"
@@ -134,22 +159,36 @@
                 },
 
                 swipeLeft() {
+                    //const container = this.$refs.swiperContainer;
+                    //container.scrollLeft -= this.offset;
                     const container = this.$refs.swiperContainer;
+                    const currentScroll = container.scrollLeft;
+                    const itemWidth = 291; // Ürün kartının genişliği
 
-                    container.scrollLeft -= this.offset;
+                    // Bir önceki ürüne kaydır
+                    container.scrollTo({
+                        left: Math.max(0, currentScroll - itemWidth),
+                        behavior: 'smooth'
+                    });
                 },
 
                 swipeRight() {
-                    const container = this.$refs.swiperContainer;
-
-                    // Check if scroll reaches the end
+                    /*const container = this.$refs.swiperContainer;
                     if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
-                        // Reset scroll to the beginning
                         container.scrollLeft = 0;
                     } else {
-                        // Scroll to the right
                         container.scrollLeft += this.offset;
-                    }
+                    }*/
+                   const container = this.$refs.swiperContainer;
+                    const currentScroll = container.scrollLeft;
+                    const itemWidth = 291; // Ürün kartının genişliği
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+
+                    // Bir sonraki ürüne kaydır
+                    container.scrollTo({
+                        left: Math.min(maxScroll, currentScroll + itemWidth),
+                        behavior: 'smooth'
+                    });
                 },
             },
         });
