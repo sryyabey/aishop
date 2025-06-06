@@ -133,7 +133,18 @@
                             if (response.data.redirect_url) {
                                 window.location.href = response.data.redirect_url;
                             } else {
-                                this.$emit('processed', response.data.payment_methods);
+                               let paymentMethods = response.data.payment_methods;
+            
+                                // Kargo metoduna göre ödeme seçeneklerini filtrele
+                                const excludedMethods = selectedMethod === 'free_free' 
+                                    ? ['cashondelivery'] 
+                                    : ['moneytransfer', 'card'];
+                                
+                                paymentMethods = paymentMethods.filter(method => 
+                                    !excludedMethods.includes(method.method)
+                                );
+
+                                this.$emit('processed', paymentMethods);
                             }
                         })
                         .catch(error => {

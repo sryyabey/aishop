@@ -834,7 +834,219 @@
     }
 
 </style>
+
+
 @endpush
+
+@php
+    // Kategori bazlı içerik verileri
+    $productContents = [
+        'taki-ve-aksesuar' => [
+            'buy-now'             => 'Hemen Satın Al',
+            'buy-now_second'      => 'Hemen Keşfet',
+            'hero-subtitle'       => 'Sofistike tasarımıyla stilinize zarafet katan altın renkli çelik . Günlük ve özel kombinlerinizin vazgeçilmezi.',
+            'features-title'      => 'Öne Çıkan Özellikler',
+            'features-description'=> 'Yüksek kaliteli 316L paslanmaz çelikten üretilmiş, özel altın kaplamasıyla solmaya ve kararmaya karşı dayanıklı .' ,
+            'why-choose'          => 'Neden Çelik Gold ?',
+            'why-description'     => 'Hipoalerjenik yapısı ve uzun ömürlü kullanımıyla konfor ve şıklığı bir arada sunar.',
+            'user-experiences'    => 'Kullanıcı Deneyimleri',
+            'faq-title'           => 'Sık Sorulan Sorular',
+            'faq-subtitle'        => 'Ürün Hakkında Merak Ettikleriniz',
+
+            'features-product'    => 'Çelik Gold ',
+            'features-other'      => 'Diğer',
+
+
+            'percentages_title'   => 'Kullanıcı Yorumları',
+
+            'section-title'       => 'Her Kombinin Vazgeçilmezi',
+            'section-desc'        => 'Altın kaplama yüzeyi ve kalın tasarımıyla gün boyu şıklık sağlayan bu çelik , farklı stillerle kolayca uyum sağlar. Paslanmaz malzemesi sayesinde uzun süre yeni gibi kalır.',
+
+            'benefits' => [
+                [
+                    'icon'  => '💛',
+                    'title' => 'Altın Kaplama',
+                    'desc'  => 'Solmaya ve kararmaya karşı dayanıklı', 
+                ],
+                [
+                    'icon'  => '💪',
+                    'title' => 'Sağlam Çelik',
+                    'desc'  => 'Dayanıklı 316L paslanmaz çelik malzeme', 
+                ],
+                [
+                    'icon'  => '👌',
+                    'title' => 'Hipoalerjenik',
+                    'desc'  => 'Cilt dostu ve alerji yapmaz',
+                ],
+                [
+                    'icon'  => '📏',
+                    'title' => 'Mükemmel Boyut',
+                    'desc'  => 'Yaklaşık 6.5 cm çap, 21 cm iç çevre',
+                ],
+            ],
+
+            'features' => [
+                [
+                    'title' => 'Altın Kaplama',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Paslanmaz Çelik',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Hipoalerjenik',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Günlük Kullanıma Uygun',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+            ],
+
+            'percentages' => [
+                [
+                    'title' => 'Şıklığından memnun kaldı',
+                    'oran'  => '96',
+                ],
+                [
+                    'title' => 'Uzun ömürlü kullandı',
+                    'oran'  => '94',
+                ],
+                [
+                    'title' => 'Tekrar satın almayı düşünüyor',
+                    'oran'  => '92',
+                ],
+            ],
+
+            'faqs' => [
+                [
+                    'question' => 'Malzemesi nedir?',
+                    'answer'   => '316L paslanmaz çelik, özel altın kaplamalıdır.', 
+                ],
+                [
+                    'question' => 'Alerji yapar mı?',
+                    'answer'   => 'Hipoalerjenik özelliği sayesinde hassas ciltler için uygundur.',
+                ],
+                [
+                    'question' => 'Nasıl temizlenir?',
+                    'answer'   => 'Nemli bezle silerek nazikçe temizleyebilirsiniz.',
+                ],
+            ],
+        ],
+        'canta2' => [
+            'buy-now' => 'Hemen Satın Al',
+            'buy-now_second' => 'Hemen Keşfet',
+            'hero-subtitle' => 'Modern tasarımı ve kullanışlı yapısıyla günlük hayatınızı kolaylaştıran şık çanta.',
+            // ... diğer çanta içeriği
+        ],
+        'default' => [
+            'buy-now'             => 'Hemen Satın Al',
+            'buy-now_second'      => 'Hemen Keşfet',
+            'hero-subtitle'       => 'Sofistike tasarımıyla stilinize zarafet katan altın renkli çelik . Günlük ve özel kombinlerinizin vazgeçilmezi.',
+            'features-title'      => 'Öne Çıkan Özellikler',
+            'features-description'=> 'Yüksek kaliteli 316L paslanmaz çelikten üretilmiş, özel altın kaplamasıyla solmaya ve kararmaya karşı dayanıklı .' ,
+            'why-choose'          => 'Neden Çelik Gold ?',
+            'why-description'     => 'Hipoalerjenik yapısı ve uzun ömürlü kullanımıyla konfor ve şıklığı bir arada sunar.',
+            'user-experiences'    => 'Kullanıcı Deneyimleri',
+            'faq-title'           => 'Sık Sorulan Sorular',
+            'faq-subtitle'        => 'Ürün Hakkında Merak Ettikleriniz',
+
+            'features-product'    => 'Çelik Gold ',
+            'features-other'      => 'Diğer',
+
+
+            'percentages_title'   => 'Kullanıcı Yorumları',
+
+            'section-title'       => 'Her Kombinin Vazgeçilmezi',
+            'section-desc'        => 'Altın kaplama yüzeyi ve kalın tasarımıyla gün boyu şıklık sağlayan bu çelik , farklı stillerle kolayca uyum sağlar. Paslanmaz malzemesi sayesinde uzun süre yeni gibi kalır.',
+
+            'benefits' => [
+                [
+                    'icon'  => '💛',
+                    'title' => 'Altın Kaplama',
+                    'desc'  => 'Solmaya ve kararmaya karşı dayanıklı', 
+                ],
+                [
+                    'icon'  => '💪',
+                    'title' => 'Sağlam Çelik',
+                    'desc'  => 'Dayanıklı 316L paslanmaz çelik malzeme', 
+                ],
+                [
+                    'icon'  => '👌',
+                    'title' => 'Hipoalerjenik',
+                    'desc'  => 'Cilt dostu ve alerji yapmaz',
+                ],
+                [
+                    'icon'  => '📏',
+                    'title' => 'Mükemmel Boyut',
+                    'desc'  => 'Yaklaşık 6.5 cm çap, 21 cm iç çevre',
+                ],
+            ],
+
+            'features' => [
+                [
+                    'title' => 'Altın Kaplama',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Paslanmaz Çelik',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Hipoalerjenik',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+                [
+                    'title' => 'Günlük Kullanıma Uygun',
+                    'icon1' => '✓',
+                    'icon2' => '✕',
+                ],
+            ],
+
+            'percentages' => [
+                [
+                    'title' => 'Şıklığından memnun kaldı',
+                    'oran'  => '96',
+                ],
+                [
+                    'title' => 'Uzun ömürlü kullandı',
+                    'oran'  => '94',
+                ],
+                [
+                    'title' => 'Tekrar satın almayı düşünüyor',
+                    'oran'  => '92',
+                ],
+            ],
+
+            'faqs' => [
+                [
+                    'question' => 'Malzemesi nedir?',
+                    'answer'   => '316L paslanmaz çelik, özel altın kaplamalıdır.', 
+                ],
+                [
+                    'question' => 'Alerji yapar mı?',
+                    'answer'   => 'Hipoalerjenik özelliği sayesinde hassas ciltler için uygundur.',
+                ],
+                [
+                    'question' => 'Nasıl temizlenir?',
+                    'answer'   => 'Nemli bezle silerek nazikçe temizleyebilirsiniz.',
+                ],
+            ],
+        ]
+    ];
+
+    // Ürün kategorisine göre içeriği seç
+    $categorySlug = $product->categories->first()->slug ?? 'default';
+    $product_detail = $productContents[$categorySlug] ?? $productContents['default'];
+@endphp
 <div class="ks-reset ks-body" style="margin-top: 50px;"> 
         <!-- Hero Section -->
         <section class="ks-hero">
