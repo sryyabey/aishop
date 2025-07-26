@@ -131,7 +131,18 @@
             methods: {
                 addAddress(params, { setErrors }) {
                     this.isStoring = true;
-                    fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+                    // fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+
+                    window.cartProductIds3 = [
+                        @foreach ($cart->items as $item)
+                            '{{ $item->product_id }}'@if(!$loop->last),@endif
+                        @endforeach
+                    ];
+                    fbq('track', 'AddPaymentInfo', {
+                        content_ids: window.cartProductIds3, // 'REQUIRED': array of product IDs
+                        content_type: 'product', // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+                    });
+
                     params['billing']['use_for_shipping'] = this.useBillingAddressForShipping;
 
                     this.moveToNextStep();

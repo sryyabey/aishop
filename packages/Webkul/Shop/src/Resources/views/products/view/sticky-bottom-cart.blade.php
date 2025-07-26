@@ -375,7 +375,11 @@ body[style*="overflow: hidden"] .sticky-cart-animate {
                             }
                         } else {
 
-                            fbq('track', 'AddToCart');
+                            // fbq('track', 'AddToCart');
+                            fbq('track', 'AddToCart', {
+                                content_ids: ["{{ $product->id }}"], // 'REQUIRED': array of product IDs
+                                content_type: 'product', // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+                            });
                             if (typeof app !== 'undefined') {
                                 app.config.globalProperties.$emitter.emit('update-mini-cart', data.data);
                                 app.config.globalProperties.$emitter.emit('add-flash', { 

@@ -424,8 +424,11 @@
                 },
                 
                 addToCart() {
-                    fbq('track', 'AddToCart'); //sepete ekleme
-                    
+                    // fbq('track', 'AddToCart'); //sepete ekleme
+                    fbq('track', 'AddToCart', {
+                        content_ids: [this.product.id], // 'REQUIRED': array of product IDs
+                        content_type: 'product', // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+                    });
             
                     this.isAddingToCart = true;
 

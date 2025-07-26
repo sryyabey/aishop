@@ -574,7 +574,17 @@
                     this.$axios.post('{{ route('shop.checkout.onepage.addresses.store') }}', payload)
                         .then((response) => {
                             this.isStoring = false;
-                            fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+                            //fbq('track', 'AddPaymentInfo');//ödeme bilgisi ekleme
+
+                            window.cartProductIds = [
+                                @foreach ($cart->items as $item)
+                                    '{{ $item->product_id }}'@if(!$loop->last),@endif
+                                @endforeach
+                            ];
+                            fbq('track', 'AddPaymentInfo', {
+                                content_ids: window.cartProductIds, // 'REQUIRED': array of product IDs
+                                content_type: 'product', // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+                            });
                             if (response.data.data.redirect_url) { 
                                 window.location.href = response.data.data.redirect_url;
                             } else {

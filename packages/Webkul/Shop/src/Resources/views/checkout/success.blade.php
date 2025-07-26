@@ -5,7 +5,18 @@
 >
 <script>
 
-fbq('track', 'Purchase');//aışvriş genel
+	// fbq('track', 'Purchase');//aışvriş genel
+	window.cartProductIds2 = [
+		@foreach ($order->items as $item)
+			'{{ $item->product_id }}'@if(!$loop->last),@endif
+		@endforeach
+	];
+	fbq('track', 'Purchase', {
+		content_ids: window.cartProductIds2, // 'REQUIRED': array of product IDs
+		value: "{{ number_format($order->grand_total, 2, '.', '') }}", // Sipariş toplamı
+        currency: '{{ $order->order_currency_code ?? 'TRY' }}', // Sipariş para birimi
+        content_type: 'product', 
+	});
     </script>
     <!-- Page Title -->
     <x-slot:title>

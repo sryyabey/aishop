@@ -54,7 +54,11 @@
 <x-shop::layouts> 
     <!-- Page Title -->
     <script>
-    fbq('track', 'ViewContent'); //sayfa görüntüleme
+    // fbq('track', 'ViewContent'); //sayfa görüntüleme
+    fbq('track', 'ViewContent', {
+        content_ids: ['{{$product->id}}'], // 'REQUIRED': array of product IDs
+        content_type: 'product', // RECOMMENDED: Either product or product_group based on the content_ids or contents being passed.
+    });
     </script>
     
     <x-slot:title>
